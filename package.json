@@ -10,17 +10,21 @@
     "node": "node server.js"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.1",
+    "@tailwindcss/forms": "^0.5.7",
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.0",
     "next": "14.1.0",
     "next-auth": "^5.0.0-beta.9",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.0.1",
     "socket.io": "^4.7.4",
     "socket.io-client": "^4.7.4",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -28,6 +32,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
+    "prisma": "^5.9.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
