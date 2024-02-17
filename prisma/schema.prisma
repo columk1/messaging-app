@@ -1,0 +1,105 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"] // Allows use of Neon serverless driver
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id Int   @id @default(autoincrement())
+  firstName String? @map("first_name")
+  lastName String? @map("last_name")
+  email String? @unique
+  password String?
+  emailVerified DateTime? @map("email_verified")
+  image String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  conversations Conversation[]
+  // conversations UserConversation[]
+  // conversationIds Int[] @map("conversation_ids")
+
+  seenMessages Message[] @relation("MessagesSeenByUser")
+  // seenMessageIds String[] @map("seen_message_ids")
+  // seenMessages UserSeenMessage[]
+
+  accounts Account[]
+  messages Message[]
+
+  @@map("users")
+}
+
+model Account {
+    id Int   @id @default(autoincrement())
+    userId Int @map("user_id")
+    type String
+    provider String
+    providerAccountId String @map("provider_account_id")
+    refreshToken String? @map("refresh_token")
+    accessToken String? @map("access_token")
+    expiresAt Int? @map("expires_at")
+    tokenType String? @map("token_type")
+    scope String?
+    idToken String? @map("id_token")
+    sessionState String? @map("session_state")
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Conversation {
+  id Int   @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  lastMessageAt DateTime @default(now()) @map("last_message_at")
+  name String?
+  isGroup Boolean?
+
+  messagesIds Int[]
+  messages Message[]
+
+  users User[]
+  // users UserConversation[] 
+  // userIds Int[] @map("user_ids")
+}
+
+model Message {
+  id Int   @id @default(autoincrement())
+  body String?
+  image String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  seen User[] @relation("MessagesSeenByUser")
+  // seen UserSeenMessage[]
+  // seenIds Int[] @map("seen_ids")
+
+  conversationId Int @map("conversation_id")
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+
+  senderId Int @map("sender_id")
+  sender User @relation(fields: [senderId], references: [id])
+
+}
+
+// model UserConversation {
+//   user User @relation(fields: [userId], references: [id])
+//   userId Int @map("user_id")
+//   conversation Conversation @relation(fields: [conversationId], references: [id])
+//   conversationId Int @map("conversation_id")
+
+//   @@id([userId, conversationId])
+// }
+
+// model UserSeenMessage {
+//   user User @relation(fields: [userId], references: [id])
+//   userId Int @map("user_id")
+//   seenMessage Message @relation(fields: [seenMessageId], references: [id])
+//   seenMessageId Int @map("seen_message_id")
+
+//   @@id([userId, seenMessageId])
+// }
