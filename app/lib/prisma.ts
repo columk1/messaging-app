@@ -16,7 +16,7 @@ const adapter = new PrismaNeon(pool)
 
 const prismaClientSingleton = () => new PrismaClient({ adapter })
 
-const prisma = globalThis.prisma && prismaClientSingleton()
+const prisma = globalThis.prisma ?? prismaClientSingleton()
 
 // Prevent multiple instances of Prisma Client in development (hot reloading can create new instances)
 if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma
