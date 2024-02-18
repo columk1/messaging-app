@@ -9,8 +9,10 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import { Button } from './button'
 import AuthSocialButton from './AuthSocialButton'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
+import { toast } from 'react-hot-toast'
+import { signIn } from 'next-auth/react'
 
-type FormType = 'LOGIN' | 'SIGNUP'
+type FormType = 'LOGIN' | 'REGISTER'
 
 const AuthForm = () => {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined)
@@ -20,7 +22,7 @@ const AuthForm = () => {
 
   const toggleFormType = useCallback(() => {
     if (formType === 'LOGIN') {
-      setFormType('SIGNUP')
+      setFormType('REGISTER')
     } else {
       setFormType('LOGIN')
     }
@@ -32,7 +34,7 @@ const AuthForm = () => {
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
 
-    if (formType === 'SIGNUP') {
+    if (formType === 'REGISTER') {
       try {
         const res = await fetch('/api/register', {
           method: 'POST',
@@ -43,18 +45,21 @@ const AuthForm = () => {
         }
       } catch (error) {
         console.log(error)
+        toast.error('Something went wrong')
       } finally {
         setLoading(false)
       }
     } else {
       // LOGIN route
       try {
-        const res = await fetch('/api/login', {
-          method: 'POST',
-          body: JSON.stringify(formData),
+        const res = await signIn('credentials', {
+          ...formData,
+          redirect: false,
         })
-        if (!res.ok) {
-          throw new Error('Failed to submit the data. Please try again.')
+        if (!res?.ok) {
+          toast.error('Invalid credentials')
+        } else {
+          toast.success('Login successful')
         }
       } catch (error) {
         console.log(error)
@@ -68,7 +73,7 @@ const AuthForm = () => {
     <div className='mt-8 sm:mx-auto sm:w-full sm: max-w-md'>
       <div className='bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
         <form onSubmit={submitHandler} className='space-y-6'>
-          {formType === 'SIGNUP' && (
+          {formType === 'REGISTER' && (
             <>
               <Input
                 type='text'
