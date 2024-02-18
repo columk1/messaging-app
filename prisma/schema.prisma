@@ -10,7 +10,7 @@ datasource db {
 }
 
 model User {
-  id Int   @id @default(autoincrement())
+  id String   @id @default(uuid())
   firstName String? @map("first_name")
   lastName String? @map("last_name")
   email String? @unique
@@ -35,18 +35,18 @@ model User {
 }
 
 model Account {
-    id Int   @id @default(autoincrement())
-    userId Int @map("user_id")
+    id String   @id @default(uuid())
+    userId String @map("user_id")
     type String
     provider String
     providerAccountId String @map("provider_account_id")
-    refreshToken String? @map("refresh_token")
-    accessToken String? @map("access_token")
-    expiresAt Int? @map("expires_at")
-    tokenType String? @map("token_type")
+    refresh_token String?
+    access_token String?
+    expires_at Int?
+    token_type String?
     scope String?
-    idToken String? @map("id_token")
-    sessionState String? @map("session_state")
+    id_token String?
+    session_state String?
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -81,7 +81,7 @@ model Message {
   conversationId Int @map("conversation_id")
   conversation Conversation @relation(fields: [conversationId], references: [id])
 
-  senderId Int @map("sender_id")
+  senderId String @map("sender_id")
   sender User @relation(fields: [senderId], references: [id])
 
 }
