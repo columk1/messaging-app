@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState, useRef } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import Input from './Input'
 // import { authenticate } from '@/app/lib/actions'
@@ -10,15 +10,21 @@ import { Button } from './button'
 import AuthSocialButton from './AuthSocialButton'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 type FormType = 'LOGIN' | 'REGISTER'
 
 const AuthForm = () => {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined)
+  const session = useSession()
   const [formType, setFormType] = useState('LOGIN')
-  // const formRef = useRef(null)
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (session?.status === 'authenticated') {
+      console.log('Authenticated')
+    }
+  }, [session?.status])
 
   const toggleFormType = useCallback(() => {
     if (formType === 'LOGIN') {
@@ -56,7 +62,7 @@ const AuthForm = () => {
           ...formData,
           redirect: false,
         })
-        if (!res?.ok) {
+        if (res?.ok) {
           toast.error('Invalid credentials')
         } else {
           toast.success('Login successful')
@@ -67,6 +73,11 @@ const AuthForm = () => {
         setLoading(false)
       }
     }
+  }
+
+  const socialAction = (action: string) => {
+    setLoading(true)
+    signIn(action, { redirect: false }).finally(() => setLoading(false))
   }
 
   return (
