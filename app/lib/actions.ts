@@ -74,4 +74,46 @@ const getConversations = async () => {
   }
 }
 
-export { getSession, getCurrentUser, getUsers, getConversations }
+const getConversationById = async (id: string) => {
+  try {
+    const currentUser = await getCurrentUser()
+    if (!currentUser) return null
+
+    const conversation = await prisma.conversation.findUnique({
+      where: {
+        id: +id,
+      },
+      include: {
+        users: true,
+      },
+      // TODO: Possibly include messages here instead of using a separate query
+    })
+    return conversation
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+const getMessages = async (id: string) => {
+  try {
+    const messages = await prisma.message.findMany({
+      where: {
+        conversationId: +id,
+      },
+      include: {
+        sender: true,
+        seen: true,
+      },
+      orderBy: {
+        createdAt: 'asc',
+      },
+    })
+    return messages
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+export { getSession, getCurrentUser, getUsers, getConversations, getConversationById, getMessages }
