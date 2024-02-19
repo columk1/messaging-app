@@ -3,15 +3,15 @@
 import { User } from '@prisma/client'
 
 interface AvatarProps {
-  user: User
+  imageUrl?: string
 }
 
-const Avatar: React.FC<AvatarProps> = ({ user }) => {
+const Avatar: React.FC<AvatarProps> = ({ imageUrl }) => {
   return (
     <div className='relative'>
       <div className='relative inline-block rounded-full overflow-hidden h-9 w-9 md:h-11 md:w-11'>
         <img
-          src={user?.image || '/placeholder.jpg'}
+          src={imageUrl || '/placeholder.jpg'}
           alt='Profile Picture'
           className='object-fit w-full h-full'
         />

@@ -29,7 +29,7 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
       onClick={handleClick}
       className='w-full relative flex items-center space-x-3 p-3 hover:bg-neutral-100 rounded-lg transition'
     >
-      <Avatar user={user} />
+      <Avatar imageUrl={user.image!} />
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>
           <div className='flex justify-between items-center mb-1'>
