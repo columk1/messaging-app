@@ -11,20 +11,22 @@ import AuthSocialButton from './AuthSocialButton'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
 import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 type FormType = 'LOGIN' | 'REGISTER'
 
 const AuthForm = () => {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined)
   const session = useSession()
+  const router = useRouter()
   const [formType, setFormType] = useState('LOGIN')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (session?.status === 'authenticated') {
-      console.log('Authenticated')
+      router.push('/users')
     }
-  }, [session?.status])
+  }, [session?.status, router])
 
   const toggleFormType = useCallback(() => {
     if (formType === 'LOGIN') {
@@ -48,6 +50,8 @@ const AuthForm = () => {
         })
         if (!res.ok) {
           throw new Error('Failed to submit the data. Please try again.')
+        } else {
+          signIn('credentials', formData)
         }
       } catch (error) {
         console.log(error)
@@ -62,10 +66,11 @@ const AuthForm = () => {
           ...formData,
           redirect: false,
         })
-        if (res?.ok) {
+        if (!res?.ok) {
           toast.error('Invalid credentials')
         } else {
           toast.success('Login successful')
+          router.push('/users')
         }
       } catch (error) {
         console.log(error)
