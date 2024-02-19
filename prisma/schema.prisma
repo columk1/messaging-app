@@ -22,10 +22,10 @@ model User {
 
   conversations Conversation[]
   // conversations UserConversation[]
-  // conversationIds Int[] @map("conversation_ids")
+  conversationIds Int[] @map("conversation_ids")
 
   seenMessages Message[] @relation("MessagesSeenByUser")
-  // seenMessageIds String[] @map("seen_message_ids")
+  seenMessageIds String[] @map("seen_message_ids")
   // seenMessages UserSeenMessage[]
 
   accounts Account[]
@@ -65,7 +65,7 @@ model Conversation {
 
   users User[]
   // users UserConversation[] 
-  // userIds Int[] @map("user_ids")
+  userIds String[] @map("user_ids")
 }
 
 model Message {
@@ -76,7 +76,7 @@ model Message {
 
   seen User[] @relation("MessagesSeenByUser")
   // seen UserSeenMessage[]
-  // seenIds Int[] @map("seen_ids")
+  seenIds Int[] @map("seen_ids")
 
   conversationId Int @map("conversation_id")
   conversation Conversation @relation(fields: [conversationId], references: [id])
