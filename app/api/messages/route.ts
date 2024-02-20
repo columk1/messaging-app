@@ -34,7 +34,7 @@ export async function POST(request: Request) {
       },
       include: {
         seen: true,
-        sender: true,
+        sender: true, // So that we can compare the session email to the sender's email
       },
     })
 
