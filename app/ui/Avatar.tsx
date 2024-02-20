@@ -3,7 +3,7 @@
 import { User } from '@prisma/client'
 
 interface AvatarProps {
-  imageUrl?: string
+  imageUrl?: string | null
 }
 
 const Avatar: React.FC<AvatarProps> = ({ imageUrl }) => {
