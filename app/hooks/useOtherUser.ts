@@ -5,10 +5,11 @@ import { User } from '@prisma/client'
 
 const useOtherUser = (conversation: FullConversationType | { users: User[] }) => {
   const session = useSession()
+
   const otherUser = useMemo(() => {
     const currentUserEmail = session.data?.user?.email
-    const user = conversation.users.find((user) => user.email !== currentUserEmail)
-    return user
+    const otherUser = conversation.users.filter((user) => user.email !== currentUserEmail)
+    return otherUser[0]
   }, [session?.data?.user?.email, conversation.users])
 
   return otherUser
