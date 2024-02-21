@@ -7,6 +7,8 @@ import toast from 'react-hot-toast'
 import Modal from '@/app/ui/Modal'
 import Input from '@/app/ui/Input'
 import Image from 'next/image'
+import { CldUploadButton } from 'next-cloudinary'
+import Button from '@/app/ui/Button'
 
 interface SettingsModalProps {
   isOpen: boolean
@@ -16,7 +18,7 @@ interface SettingsModalProps {
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentUser }) => {
   const router = useRouter()
-  const [image, setImage] = useState(currentUser?.im)
+  const [image, setImage] = useState(currentUser?.image)
   const [loading, setLoading] = useState(false)
 
   const handleUpload = (result: any) => {
@@ -60,6 +62,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
                     src={image || currentUser?.image || '/images/placeholder.jpg'}
                     alt='Avatar'
                   />
+                  <CldUploadButton
+                    options={{ maxFiles: 1 }}
+                    onUpload={handleUpload}
+                    uploadPreset='xi5pas5g'
+                  >
+                    <Button disabled={loading} secondary>
+                      Change
+                    </Button>
+                  </CldUploadButton>
                 </div>
               </div>
             </div>
