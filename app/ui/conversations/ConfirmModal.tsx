@@ -19,6 +19,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose }) => {
   const { conversationId } = useConversation()
   const [loading, setLoading] = useState(false)
 
+  // Delete the conversation
   const onDelete = useCallback(async () => {
     setLoading(true)
 
