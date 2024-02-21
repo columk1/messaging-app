@@ -51,7 +51,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
             <h2 className='text-base font-semibold leading-7 text-gray-900'>Profile</h2>
             <p className='mt-1 text-sm leading-6 text-gray-600'>Edit your public information.</p>
             <div className='mt-10 flex flex-col gap-y-8'>
-              <Input disabled={loading} label='Name' id='name' name='name' required />
+              <Input
+                label='Name'
+                id='name'
+                name='name'
+                defaultValue={currentUser?.name ?? ''}
+                required
+                disabled={loading}
+              />
               <div>
                 <label className='block text-sm font-medium leading-6 text-gray-900'>Photo</label>
                 <div className='mt-2 flex items-center gap-x-3'>
@@ -74,6 +81,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
                 </div>
               </div>
             </div>
+          </div>
+          <div className='mt-6 flex items-center justify-end gap-2'>
+            <Button onClick={onClose} secondary disabled={loading}>
+              Cancel
+            </Button>
+            <Button type='submit' disabled={loading}>
+              Save
+            </Button>
           </div>
         </div>
       </form>

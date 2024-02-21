@@ -3,16 +3,17 @@
 import clsx from 'clsx'
 
 interface InputProps {
+  type?: string
   label: string
   id: string
   name: string
-  type?: string
+  defaultValue?: string
   required?: boolean
   errors?: any
   disabled?: boolean
 }
 
-const Input = ({ label, id, name, type, required, errors, disabled }: InputProps) => {
+const Input = ({ type, label, id, name, defaultValue, required, errors, disabled }: InputProps) => {
   return (
     <div>
       <label className='block text-sm font-medium leading-6 text-gray-900' htmlFor={id}>
@@ -20,9 +21,10 @@ const Input = ({ label, id, name, type, required, errors, disabled }: InputProps
       </label>
       <div className='mt-2'>
         <input
+          type={type}
           id={id}
           name={name}
-          type={type}
+          defaultValue={defaultValue}
           autoComplete={id}
           disabled={disabled}
           required={required}
