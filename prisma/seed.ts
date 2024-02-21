@@ -11,8 +11,7 @@ async function main() {
         where: { email: user.email },
         update: {},
         create: {
-          firstName: user.firstName,
-          lastName: user.lastName,
+          name: user.name,
           email: user.email,
           password: hashedPassword,
           createdAt: new Date(),
