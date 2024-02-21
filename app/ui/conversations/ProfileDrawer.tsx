@@ -38,11 +38,6 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, isOpen, onClose }) 
 
   return (
     <>
-      <ConfirmModal
-        isOpen={isConfirmModalOpen}
-        onClose={() => setIsConfirmModalOpen(false)}
-      ></ConfirmModal>
-
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-50' onClose={onClose}>
           <Transition.Child
@@ -66,6 +61,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, isOpen, onClose }) 
                     leaveTo='translate-x-full'
                   >
                     <Dialog.Panel className='w-screen max-w-md pointer-events-auto'>
+                      <ConfirmModal
+                        isOpen={isConfirmModalOpen}
+                        onClose={() => setIsConfirmModalOpen(false)}
+                      ></ConfirmModal>
+
                       <div className='flex flex-col h-full overflow-y-scroll bg-white py-6 shadow-xl'>
                         <div className='px-4 sm:px-6'>
                           <div className='flex items-start justify-end'>
