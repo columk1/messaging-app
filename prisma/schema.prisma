@@ -11,8 +11,7 @@ datasource db {
 
 model User {
   id String   @id @default(uuid())
-  firstName String? @map("first_name")
-  lastName String? @map("last_name")
+  name String? @map("name")
   email String? @unique
   password String?
   emailVerified DateTime? @map("email_verified")

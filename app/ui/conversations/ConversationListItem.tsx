@@ -61,7 +61,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
         <div className='focus:outline-none'>
           <div className='flex justify-between items-center mb-1'>
             <p className='text-md font-medium text-gray-900'>
-              {conversation.name || `${otherUser?.firstName} ${otherUser?.lastName}`}
+              {conversation.name || otherUser?.name}
             </p>
             {lastMessage?.createdAt && (
               <p className='text-xs text-gray-400 font-light'>

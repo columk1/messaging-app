@@ -16,8 +16,7 @@ export const authOptions: AuthOptions = {
       profile: (profile) => {
         return {
           id: profile.id,
-          firstName: profile.name?.split(' ')[0] || '',
-          lastName: profile.name?.split(' ')[1] || '',
+          name: profile.name,
           email: profile.email,
           image: profile.avatar_url,
         }
@@ -30,8 +29,7 @@ export const authOptions: AuthOptions = {
         console.log(profile)
         return {
           id: profile.sub,
-          firstName: profile.given_name,
-          lastName: profile.family_name,
+          name: profile.given_name + ' ' + profile.family_name,
           email: profile.email,
           image: profile.picture,
         }

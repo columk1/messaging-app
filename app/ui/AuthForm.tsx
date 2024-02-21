@@ -91,22 +91,7 @@ const AuthForm = () => {
         <form onSubmit={submitHandler} className='space-y-6'>
           {formType === 'REGISTER' && (
             <>
-              <Input
-                type='text'
-                id='firstName'
-                name='firstName'
-                label='First Name'
-                required={true}
-                errors={[]}
-              />
-              <Input
-                type='text'
-                id='lastName'
-                name='lastName'
-                label='Last Name'
-                required={true}
-                errors={[]}
-              />
+              <Input type='text' id='name' name='name' label='Name' required={true} errors={[]} />
             </>
           )}
           <Input type='text' id='email' name='email' label='Email' required={true} errors={[]} />

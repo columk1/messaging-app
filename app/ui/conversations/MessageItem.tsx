@@ -14,12 +14,12 @@ interface MessageProps {
 }
 const MessageItem: React.FC<MessageProps> = ({ message, isLast }) => {
   const session = useSession()
-  const senderName = message?.sender?.firstName + '' + message?.sender?.lastName
+  const senderName = message?.sender?.name
 
   const isOwn = session?.data?.user?.email === message?.sender?.email
   const seenList = (message.seen || [])
     .filter((user) => user.email !== message?.sender?.email)
-    .map((user) => `${user.firstName} ${user.lastName}`)
+    .map((user) => user.name)
     .join(', ')
 
   const container = clsx('flex gap-3 p-4', isOwn && 'justify-end')

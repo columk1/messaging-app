@@ -5,17 +5,16 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { firstName, lastName, email, password } = body
+    const { name, email, password } = body
 
-    if (!email || !firstName || !lastName || !password) {
+    if (!email || !name || !password) {
       return new NextResponse('Incomplete data', { status: 400 })
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
     const user = await prisma.user.create({
       data: {
-        firstName,
-        lastName,
+        name,
         email,
         password: hashedPassword,
       },
