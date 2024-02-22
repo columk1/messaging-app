@@ -1,6 +1,5 @@
 'use client'
 
-import { User } from '@prisma/client'
 import Image from 'next/image'
 
 interface AvatarGroupProps {
@@ -20,7 +19,7 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ imageUrls = [] }) => {
     <div className='relative h-11 w-11'>
       {slicedUrls.map((url, index) => (
         <div
-          key={url}
+          key={url || index}
           className={`absolute inline-block rounded-full overflow-hidden h-[22px] w-[22px] ${positionMap[index]}`}
         >
           <Image src={url || '/placeholder.jpg'} alt='Profile Picture' fill />
