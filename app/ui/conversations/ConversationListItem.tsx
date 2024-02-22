@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react'
 import clsx from 'clsx'
 import useOtherUser from '@/app/hooks/useOtherUser'
 import Avatar from '@/app/ui/Avatar'
+import AvatarGroup from './AvatarGroup'
 
 interface ConversationListItemProps {
   conversation: FullConversationType
@@ -56,7 +57,11 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
         selected ? 'bg-neutral-100' : 'bg-white'
       )}
     >
-      <Avatar imageUrl={otherUser?.image!} />
+      {conversation.isGroup ? (
+        <AvatarGroup users={conversation.users} />
+      ) : (
+        <Avatar imageUrl={otherUser?.image!} />
+      )}
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>
           <div className='flex justify-between items-center mb-1'>
