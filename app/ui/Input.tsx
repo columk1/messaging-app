@@ -8,12 +8,23 @@ interface InputProps {
   id: string
   name: string
   defaultValue?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   required?: boolean
   errors?: any
   disabled?: boolean
 }
 
-const Input = ({ type, label, id, name, defaultValue, required, errors, disabled }: InputProps) => {
+const Input = ({
+  type,
+  label,
+  id,
+  name,
+  defaultValue,
+  onChange,
+  required,
+  errors,
+  disabled,
+}: InputProps) => {
   return (
     <div>
       <label className='block text-sm font-medium leading-6 text-gray-900' htmlFor={id}>
@@ -25,6 +36,7 @@ const Input = ({ type, label, id, name, defaultValue, required, errors, disabled
           id={id}
           name={name}
           defaultValue={defaultValue}
+          onChange={onChange}
           autoComplete={id}
           disabled={disabled}
           required={required}
