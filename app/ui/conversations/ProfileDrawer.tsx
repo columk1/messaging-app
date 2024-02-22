@@ -8,6 +8,7 @@ import { Transition, Dialog } from '@headlessui/react'
 import { IoClose, IoTrash } from 'react-icons/io5'
 import Avatar from '@/app/ui/Avatar'
 import ConfirmModal from './ConfirmModal'
+import AvatarGroup from './AvatarGroup'
 
 interface ProfileDrawerProps {
   data: Conversation & {
@@ -83,7 +84,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, isOpen, onClose }) 
                         <div className='relative mt-6 flex-1 px-4 sm:px-6'>
                           <div className='flex flex-col items-center'>
                             <div className='mb-2'>
-                              <Avatar imageUrl={otherUser.image} />
+                              {data.isGroup ? (
+                                <AvatarGroup imageUrls={data.users.map((user) => user.image)} />
+                              ) : (
+                                <Avatar imageUrl={otherUser?.image} />
+                              )}
                             </div>
                             <div>{title}</div>
                             <div className='text-sm text-gray-500'>{statusText}</div>
@@ -102,7 +107,16 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, isOpen, onClose }) 
                             </div>
                             <div className='w-full py-5 sm:px-0 sm:pt-0'>
                               <dl className='space-y-8 px-4 sm:space-y-6 sm:px-6'>
-                                {!data.isGroup && (
+                                {data.isGroup ? (
+                                  <div>
+                                    <dt className='text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0'>
+                                      Emails
+                                    </dt>
+                                    <dd className='mt-1 text-sm text-gray-900 sm:col-span-2'>
+                                      {data.users.map((user) => user.email).join(', ')}
+                                    </dd>
+                                  </div>
+                                ) : (
                                   <>
                                     <div>
                                       <dt className='text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0'>
