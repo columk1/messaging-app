@@ -58,7 +58,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
       )}
     >
       {conversation.isGroup ? (
-        <AvatarGroup users={conversation.users} />
+        <AvatarGroup imageUrls={conversation.users.map((user) => user.image)} />
       ) : (
         <Avatar imageUrl={otherUser?.image!} />
       )}
