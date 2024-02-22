@@ -9,6 +9,7 @@ import Input from '@/app/ui/Input'
 import Image from 'next/image'
 import { CldUploadButton } from 'next-cloudinary'
 import Button from '@/app/ui/Button'
+import clsx from 'clsx'
 
 interface SettingsModalProps {
   isOpen: boolean
@@ -29,7 +30,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
     setLoading(true)
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
-    console.log(formData)
+    if (image !== null) formData.image = image
 
     fetch('/api/settings', {
       method: 'POST',
@@ -74,9 +75,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
                     onUpload={handleUpload}
                     uploadPreset='xi5pas5g'
                   >
-                    <Button disabled={loading} secondary>
-                      Change
-                    </Button>
+                    {/* Use a span here with button styling since it will be nested inside a button component and will throw an error in the browser */}
+                    <span
+                      className={clsx(
+                        'flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50',
+                        loading && 'opacity-50 cursor-default'
+                      )}
+                    >
+                      Upload
+                    </span>
                   </CldUploadButton>
                 </div>
               </div>
