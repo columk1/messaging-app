@@ -75,7 +75,7 @@ model Message {
 
   seen User[] @relation("MessagesSeenByUser")
   // seen UserSeenMessage[]
-  seenIds Int[] @map("seen_ids")
+  seenIds String[] @map("seen_ids")
 
   conversationId Int @map("conversation_id")
   conversation Conversation @relation(fields: [conversationId], references: [id])
