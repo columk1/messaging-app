@@ -20,7 +20,7 @@ export async function DELETE(request: Request, { params }: { params: Params }) {
       return new NextResponse('Invalid ID', { status: 400 })
     }
 
-    const deletedConversation = await prisma.conversation.deleteMany({
+    const deletedConversation = await prisma.conversation.delete({
       where: {
         id: +conversationId,
         // Only allow users who are in the group to delete the conversation
