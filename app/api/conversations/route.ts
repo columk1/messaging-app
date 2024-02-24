@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     const currentUser = await getCurrentUser()
     const body = await request.json()
-    console.log('Body: ', body)
+    // console.log('Body: ', body)
     const { userId, isGroup, members, name } = body
 
     if (!currentUser?.id || !currentUser?.email) {
@@ -57,14 +57,10 @@ export async function POST(request: Request) {
         },
       })
 
-      console.log('Checked for existing convos')
-
       // Return the existing conversation if it exists
       if (existingConversation) {
         return NextResponse.json(existingConversation)
       }
-
-      console.log('Creating new conversation')
 
       // Create a new conversation
       const newConversation = await prisma.conversation.create({

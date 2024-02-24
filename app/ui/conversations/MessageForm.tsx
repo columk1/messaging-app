@@ -17,7 +17,6 @@ const MessageForm = () => {
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
     formData.conversationId = conversationId
-    console.log(formData)
 
     e.currentTarget.message.value = ''
 

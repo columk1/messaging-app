@@ -33,7 +33,6 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
     pusherClient.subscribe(pusherKey)
 
     const newConversationHandler = (conversation: FullConversationType) => {
-      console.log('Pusher conversation:new')
       setItems((prevItems) =>
         prevItems.find((item) => item.id === conversation.id)
           ? prevItems

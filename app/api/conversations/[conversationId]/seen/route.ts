@@ -42,7 +42,7 @@ export async function POST(request: Request, { params }: { params: Params }) {
     }
 
     // TODO: Reduce calls to this query
-    console.log('Updating Seen Status')
+    // console.log('Updating Seen Status')
     const updatedMessage = await prisma.message.update({
       where: {
         id: lastMessage.id,
