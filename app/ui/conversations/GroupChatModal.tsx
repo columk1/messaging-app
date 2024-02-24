@@ -21,6 +21,7 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users 
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setLoading(true)
 
     fetch('/api/conversations', {
