@@ -60,7 +60,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
       {conversation.isGroup ? (
         <AvatarGroup imageUrls={conversation.users.map((user) => user.image)} />
       ) : (
-        <Avatar imageUrl={otherUser?.image!} />
+        <Avatar imageUrl={otherUser?.image!} userEmail={otherUser?.email || ''} />
       )}
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>
