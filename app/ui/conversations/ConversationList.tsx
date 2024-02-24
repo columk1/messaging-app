@@ -51,8 +51,12 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
       )
     }
 
-    const removeConversationHandler = (conversationId: number) => {
-      setItems((prevItems) => prevItems.filter((item) => item.id !== conversationId))
+    const removeConversationHandler = (deletedConversationId: number) => {
+      setItems((prevItems) => prevItems.filter((item) => item.id !== deletedConversationId))
+      // Redirect the other users if they have the deleted conversation open
+      if (+conversationId === deletedConversationId) {
+        router.push('/conversations')
+      }
     }
 
     pusherClient.bind('conversation:new', newConversationHandler)
