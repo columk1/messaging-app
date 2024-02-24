@@ -42,11 +42,6 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
     }
 
     const updateConversationHandler = (conversation: FullConversationType) => {
-      items.forEach((current) => {
-        if (current.id === conversation.id) {
-          console.log('Current last message: ', current.messages.slice(-1)[0])
-        }
-      })
       setItems((prevItems) =>
         prevItems.map((prevConversation) =>
           prevConversation.id === conversation.id
@@ -56,13 +51,19 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
       )
     }
 
+    const removeConversationHandler = (conversationId: number) => {
+      setItems((prevItems) => prevItems.filter((item) => item.id !== conversationId))
+    }
+
     pusherClient.bind('conversation:new', newConversationHandler)
     pusherClient.bind('conversation:update', updateConversationHandler)
+    pusherClient.bind('conversation:remove', removeConversationHandler)
 
     return () => {
       pusherClient.unsubscribe(pusherKey)
       pusherClient.unbind('conversation:new', newConversationHandler)
       pusherClient.unbind('conversation:update', updateConversationHandler)
+      pusherClient.unbind('conversation:remove', removeConversationHandler)
     }
   }, [pusherKey, router])
 
