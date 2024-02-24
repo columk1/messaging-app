@@ -8,6 +8,7 @@ import { HiChevronLeft, HiEllipsisHorizontal } from 'react-icons/hi2'
 import Avatar from '@/app/ui/Avatar'
 import ProfileDrawer from './ProfileDrawer'
 import AvatarGroup from './AvatarGroup'
+import useActiveList from '@/app/hooks/useActiveList'
 
 interface HeaderProps {
   conversation: Conversation & {
@@ -19,13 +20,16 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
   const otherUser = useOtherUser(conversation)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
+  const { members } = useActiveList()
+  const isActive = members.indexOf(otherUser?.email!) !== -1
+
   const statusText = useMemo(() => {
     if (conversation.isGroup) {
       return `${conversation.users.length} members`
     }
 
-    return 'Active' // TODO: When websocket is implemented
-  }, [conversation])
+    return isActive ? 'Active' : 'Offline'
+  }, [conversation, isActive])
 
   return (
     <>
@@ -42,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           {conversation.isGroup ? (
             <AvatarGroup imageUrls={conversation.users.map((user) => user.image)} />
           ) : (
-            <Avatar imageUrl={otherUser?.image} />
+            <Avatar imageUrl={otherUser?.image} userEmail={otherUser?.email || ''} />
           )}
           <div className='flex flex-col'>
             <div>{conversation.name || otherUser?.name}</div>
