@@ -29,24 +29,42 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
 
   useEffect(() => {
     if (!pusherKey) return
+
     pusherClient.subscribe(pusherKey)
 
     const newConversationHandler = (conversation: FullConversationType) => {
-      setItems((prevItems) => {
-        if (prevItems.find((item) => item.id === conversation.id)) {
-          return prevItems
+      console.log('Pusher conversation:new')
+      setItems((prevItems) =>
+        prevItems.find((item) => item.id === conversation.id)
+          ? prevItems
+          : [conversation, ...prevItems]
+      )
+    }
+
+    const updateConversationHandler = (conversation: FullConversationType) => {
+      items.forEach((current) => {
+        if (current.id === conversation.id) {
+          console.log('Current last message: ', current.messages.slice(-1)[0])
         }
-        return [conversation, ...prevItems]
       })
+      setItems((prevItems) =>
+        prevItems.map((prevConversation) =>
+          prevConversation.id === conversation.id
+            ? { ...prevConversation, messages: conversation.messages }
+            : prevConversation
+        )
+      )
     }
 
     pusherClient.bind('conversation:new', newConversationHandler)
+    pusherClient.bind('conversation:update', updateConversationHandler)
 
     return () => {
       pusherClient.unsubscribe(pusherKey)
       pusherClient.unbind('conversation:new', newConversationHandler)
+      pusherClient.unbind('conversation:update', updateConversationHandler)
     }
-  }, [pusherKey])
+  }, [pusherKey, router])
 
   return (
     <>
