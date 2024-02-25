@@ -1,3 +1,5 @@
+'use client'
+
 import { Channel, Members } from 'pusher-js'
 import { useEffect, useState } from 'react'
 import useActiveList from './useActiveList'
