@@ -15,7 +15,7 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
 
   const handleClick = useCallback(async () => {
     setLoading(true)
-    const response = await fetch('http://localhost:3000/api/conversations', {
+    const response = await fetch('/api/conversations', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId: user.id }),
