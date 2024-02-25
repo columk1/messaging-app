@@ -38,7 +38,7 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast }) => {
   return (
     <div className={container}>
       <div className={avatar}>
-        <Avatar imageUrl={data.sender?.image} />
+        <Avatar imageUrl={data.sender?.image} userEmail={data.sender?.email || ''} />
       </div>
       <div className={body}>
         <div className='flex items-center gap-1'>
