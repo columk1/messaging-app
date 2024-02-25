@@ -54,10 +54,11 @@ export async function POST(request: Request) {
           userIds: {
             hasEvery: [currentUser.id, userId],
           },
+          isGroup: null,
         },
       })
 
-      // Return the existing conversation if it exists
+      // Return the existing conversation if it exists and isn't a group conversation
       if (existingConversation) {
         return NextResponse.json(existingConversation)
       }
