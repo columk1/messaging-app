@@ -13,8 +13,16 @@ const ImageModal: React.FC<ImageModalProps> = ({ src, isOpen, onClose }) => {
   return (
     src && (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <div className='w-80 h-80'>
-          <Image src={src} alt='User image' fill className={'object-cover'} />
+        <div className='relative h-80'>
+          <Image
+            src={src}
+            alt='Image Preview'
+            fill
+            className='object-contain'
+            placeholder='blur'
+            blurDataURL='/placeholder-image.webp'
+            sizes='(max-width: 768px) 100vw, 33vw'
+          />
         </div>
       </Modal>
     )

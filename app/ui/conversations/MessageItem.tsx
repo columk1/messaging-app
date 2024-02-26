@@ -31,8 +31,8 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast }) => {
   const body = clsx('flex flex-col gap-2', isOwn && 'items-end')
   const messageBody = clsx(
     'text-sm w-fit overflow-hidden',
-    isOwn ? 'bg-sky-500 text-white' : 'bg-gray-100',
-    data.image ? 'rounded-md p-0' : 'rounded-full py-2 px-3'
+    isOwn && !data.image ? 'bg-sky-500 text-white' : 'bg-gray-100',
+    data.image ? 'rounded-md p-0 bg-gray-100' : 'rounded-full py-2 px-3'
   )
 
   return (
@@ -55,11 +55,13 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast }) => {
               />
               <Image
                 onClick={() => setImageModalOpen(true)}
-                alt='image'
+                alt='Image Message'
                 height='288'
                 width='288'
+                placeholder='blur'
+                blurDataURL='/placeholder-image.webp'
                 src={data.image}
-                className='object-cover cursor-pointer hover:scale-110 transition translate'
+                className='object-cover cursor-pointer'
               />
             </>
           ) : (
