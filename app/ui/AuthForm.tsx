@@ -12,14 +12,14 @@ import { BsGithub, BsGoogle } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 type FormType = 'LOGIN' | 'REGISTER'
 
-const AuthForm = () => {
+const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined)
   const session = useSession()
   const router = useRouter()
-  const [formType, setFormType] = useState('LOGIN')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -30,9 +30,9 @@ const AuthForm = () => {
 
   const toggleFormType = useCallback(() => {
     if (formType === 'LOGIN') {
-      setFormType('REGISTER')
+      router.push('/register')
     } else {
-      setFormType('LOGIN')
+      router.push('/login')
     }
   }, [formType])
 
@@ -122,9 +122,14 @@ const AuthForm = () => {
 
         <div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500'>
           <div>{formType === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}</div>
-          <div onClick={toggleFormType} className='underline cursor-pointer'>
+          {/* <Link
+            href={formType === 'LOGIN' ? '/register' : '/login'}
+            className='underline cursor-pointer'
+          > */}
+          <button onClick={toggleFormType} className='underline cursor-pointer'>
             {formType === 'LOGIN' ? 'Sign Up' : 'Login'}
-          </div>
+          </button>
+          {/* </Link> */}
         </div>
       </div>
     </div>
