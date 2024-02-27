@@ -1,8 +1,8 @@
 import { getConversationById, getMessages } from '@/app/lib/actions'
 import EmptyState from '@/app/ui/EmptyState'
-import ConversationBody from '@/app/ui/conversations/ConversationBody'
-import Header from '@/app/ui/conversations/Header'
-import MessageForm from '@/app/ui/conversations/MessageForm'
+import ConversationBody from '@/app/ui/conversations/[conversationId]/ConversationBody'
+import Header from '@/app/ui/conversations/[conversationId]/Header'
+import MessageForm from '@/app/ui/conversations/[conversationId]/MessageForm'
 
 interface Params {
   conversationId: string

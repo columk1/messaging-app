@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { MdOutlineGroupAdd } from 'react-icons/md'
 import ConversationListItem from './ConversationListItem'
-import GroupChatModal from './GroupChatModal'
+import GroupChatModal from './[conversationId]/GroupChatModal'
 import { useSession } from 'next-auth/react'
 import { pusherClient } from '@/app/lib/pusher'
 

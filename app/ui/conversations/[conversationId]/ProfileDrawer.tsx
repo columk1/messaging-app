@@ -8,7 +8,7 @@ import { Transition, Dialog } from '@headlessui/react'
 import { IoClose, IoTrash } from 'react-icons/io5'
 import Avatar from '@/app/ui/Avatar'
 import ConfirmModal from './ConfirmModal'
-import AvatarGroup from './AvatarGroup'
+import AvatarGroup from '../../AvatarGroup'
 import useActiveList from '@/app/hooks/useActiveList'
 
 interface ProfileDrawerProps {

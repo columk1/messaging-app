@@ -9,7 +9,7 @@ import { useSession } from 'next-auth/react'
 import clsx from 'clsx'
 import useOtherUser from '@/app/hooks/useOtherUser'
 import Avatar from '@/app/ui/Avatar'
-import AvatarGroup from './AvatarGroup'
+import AvatarGroup from '../AvatarGroup'
 
 interface ConversationListItemProps {
   conversation: FullConversationType
