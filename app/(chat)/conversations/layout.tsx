@@ -1,4 +1,3 @@
-import Sidebar from '@/app/ui/sidebar/Sidebar'
 import ConversationList from '@/app/ui/conversations/ConversationList'
 import { getConversations, getUsers } from '@/app/lib/actions'
 

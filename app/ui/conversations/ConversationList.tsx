@@ -75,7 +75,7 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
       <GroupChatModal users={users} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <aside
         className={clsx(
-          `pb-20 lg:pb-0 lg:w-80 lg:block overflow-y-auto border-r bg-white border-gray-200`,
+          `pb-20 lg:pb-0 lg:w-80 lg:min-w-80 lg:block overflow-y-auto border-r bg-white border-gray-200`,
           isOpen ? 'hidden' : 'block w-full left-0'
         )}
       >
