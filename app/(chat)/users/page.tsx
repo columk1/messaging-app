@@ -7,7 +7,7 @@ const Users = async () => {
   return (
     <>
       <UserList items={users} />
-      <div className='hidden lg:block lg:pl-80 h-full'>
+      <div className='hidden lg:block flex-1 h-full'>
         <EmptyState />
       </div>
     </>

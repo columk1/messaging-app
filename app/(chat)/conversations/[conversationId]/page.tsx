@@ -13,13 +13,13 @@ const ConversationId = async ({ params }: { params: Params }) => {
   const messages = await getMessages(params.conversationId)
 
   return !conversation ? (
-    <div className='lg:pl-80 h-full'>
+    <div className='h-full flex-1'>
       <div className='h-full flex flex-col'>
         <EmptyState />
       </div>
     </div>
   ) : (
-    <div className='lg:pl-80 h-full'>
+    <div className='h-full flex-1'>
       <div className='h-full flex flex-col'>
         <Header conversation={conversation} />
         <ConversationBody initialMessages={messages || []} />
