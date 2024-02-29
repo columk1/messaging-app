@@ -10,7 +10,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<ClientUser[]>([])
 
   useEffect(() => {
-    if (users) return
+    if (users.length > 0) return
     console.log('Fetching users')
     const fetchUsers = async () => {
       const fetchedUsers = await getUsers()

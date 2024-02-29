@@ -1,3 +1,5 @@
+'use server'
+
 import prisma from '@/app/lib/prisma'
 import { getServerSession } from 'next-auth'
 
@@ -8,7 +10,6 @@ const getSession = async () => await getServerSession(authOptions)
 const getCurrentUser = async () => {
   try {
     const session = await getSession()
-    console.log(session)
 
     if (!session?.user?.email) return null
 
