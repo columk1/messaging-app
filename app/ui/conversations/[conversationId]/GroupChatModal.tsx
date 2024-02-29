@@ -1,6 +1,5 @@
 'use client'
 
-import { User } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -8,11 +7,12 @@ import Modal from '@/app/ui/Modal'
 import Input from '@/app/ui/Input'
 import Select from '@/app/ui/Select'
 import Button from '@/app/ui/Button'
+import { ClientUser } from '@/app/lib/definitions'
 
 interface GroupChatModalProps {
   isOpen?: boolean
   onClose: () => void
-  users: User[]
+  users: ClientUser[]
 }
 
 const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users }) => {

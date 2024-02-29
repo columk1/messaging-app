@@ -1,12 +1,12 @@
 'use client'
 
-import { User } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { useState, useCallback } from 'react'
 import Avatar from '@/app/ui/Avatar'
+import { ClientUser } from '@/app/lib/definitions'
 
 interface UserBoxProps {
-  user: User
+  user: ClientUser
 }
 
 const UserBox: React.FC<UserBoxProps> = ({ user }) => {

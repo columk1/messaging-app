@@ -1,8 +1,7 @@
 'use client'
 
 import useConversation from '@/app/hooks/useConversation'
-import { FullConversationType } from '@/app/lib/definitions'
-import { User } from '@prisma/client'
+import { ClientUser, FullConversationType } from '@/app/lib/definitions'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
@@ -14,7 +13,7 @@ import { pusherClient } from '@/app/lib/pusher'
 
 interface ConversationListProps {
   initialItems: FullConversationType[]
-  users: User[]
+  users: ClientUser[]
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users }) => {

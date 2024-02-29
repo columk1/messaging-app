@@ -5,7 +5,6 @@ import { authOptions } from '@/app/lib/auth'
 
 const getSession = async () => await getServerSession(authOptions)
 
-// ? Does this need to query the db? If so, do all calls to this need the full user from the db?
 const getCurrentUser = async () => {
   try {
     const session = await getSession()
@@ -13,26 +12,29 @@ const getCurrentUser = async () => {
 
     if (!session?.user?.email) return null
 
-    // Use the server session if it contains the extended data
+    // Use the server session if it contains the extended id property
     if (session?.user?.id) return session.user
 
-    const currentUser = await prisma.user.findUnique({
-      where: {
-        email: session.user.email as string,
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        image: true,
-      },
-    })
-    return currentUser ?? null
+    // Unlikely to reach here
+    return null
+    // const currentUser = await prisma.user.findUnique({
+    //   where: {
+    //     email: session.user.email as string,
+    //   },
+    //   select: {
+    //     id: true,
+    //     name: true,
+    //     email: true,
+    //     image: true,
+    //   },
+    // })
+    // return currentUser ?? null
   } catch (error) {
     return null
   }
 }
 
+// Returns an array of all users except current user
 const getUsers = async () => {
   const session = await getSession()
 
@@ -47,6 +49,12 @@ const getUsers = async () => {
         NOT: {
           email: session.user.email,
         },
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        image: true,
       },
     })
     return users
