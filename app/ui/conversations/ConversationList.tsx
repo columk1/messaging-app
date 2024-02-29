@@ -3,20 +3,23 @@
 import useConversation from '@/app/hooks/useConversation'
 import { ClientUser, FullConversationType } from '@/app/lib/definitions'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { MdOutlineGroupAdd } from 'react-icons/md'
 import ConversationListItem from './ConversationListItem'
 import GroupChatModal from './[conversationId]/GroupChatModal'
 import { useSession } from 'next-auth/react'
 import { pusherClient } from '@/app/lib/pusher'
+import { UserContext } from '@/app/context/UserContext'
 
 interface ConversationListProps {
   initialItems: FullConversationType[]
-  users: ClientUser[]
+  // users: ClientUser[]
 }
 
-const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users }) => {
+const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => {
+  console.log(initialItems)
+  const users = useContext(UserContext)
   const [items, setItems] = useState(initialItems) // Conversations
   const [isModalOpen, setIsModalOpen] = useState(false)
 
