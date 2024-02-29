@@ -80,11 +80,11 @@ const getConversations = async () => {
         },
       },
       include: {
-        users: { select: { id: true, name: true, email: true, image: true } },
+        users: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
         messages: {
           include: {
-            sender: { select: { id: true, name: true, email: true, image: true } },
-            seen: { select: { id: true, name: true, email: true, image: true } },
+            sender: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+            seen: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
           },
         },
       },
@@ -106,9 +106,14 @@ const getConversationById = async (id: string) => {
         id: +id,
       },
       include: {
-        users: true,
+        users: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+        messages: {
+          include: {
+            sender: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+            seen: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+          },
+        },
       },
-      // TODO: Possibly include messages here instead of using a separate query
     })
     return conversation
   } catch (error) {
