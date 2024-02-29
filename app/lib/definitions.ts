@@ -1,12 +1,12 @@
 import { Conversation, Message, User } from '@prisma/client'
 
 export type FullMessageType = Message & {
-  sender: User
-  seen: User[]
+  sender: ClientUser
+  seen: ClientUser[]
 }
 
 export type FullConversationType = Conversation & {
-  users: User[]
+  users: ClientUser[]
   messages: FullMessageType[]
 }
 

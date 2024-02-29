@@ -36,9 +36,9 @@ export async function POST(request: Request, { params }: { params: Params }) {
 
     const lastMessage = conversation.messages[conversation.messages.length - 1]
 
-    // Return conversation if there are no messages
+    // Return status No Content if there are no messages
     if (!lastMessage) {
-      return NextResponse.json(conversation)
+      return new NextResponse(null, { status: 204 })
     }
 
     // TODO: Reduce calls to this query
@@ -49,8 +49,8 @@ export async function POST(request: Request, { params }: { params: Params }) {
         id: lastMessage.id,
       },
       include: {
-        sender: true,
-        seen: true,
+        sender: { select: { id: true, name: true, email: true, image: true } },
+        seen: { select: { id: true, name: true, email: true, image: true } },
       },
       data: {
         seen: {
@@ -61,6 +61,9 @@ export async function POST(request: Request, { params }: { params: Params }) {
       },
     })
 
+    console.log('Updated Message: ', updatedMessage)
+
+    // Update seen status in the conversation list
     await pusherServer.trigger(currentUser.email, 'conversation:update', {
       id: +conversationId,
       messages: [updatedMessage],
@@ -68,12 +71,13 @@ export async function POST(request: Request, { params }: { params: Params }) {
 
     // Skip the pusher trigger if the user has already seen the message
     if (lastMessage.seen.some((user) => user.id === currentUser.id)) {
-      return NextResponse.json(conversation)
+      return new NextResponse(null, { status: 204 })
     }
 
+    // Update seen status in the main conversation window
     await pusherServer.trigger(conversationId!, 'message:update', updatedMessage)
 
-    return NextResponse.json(updatedMessage)
+    return new NextResponse(null, { status: 204 })
   } catch (error) {
     console.log(error)
     return new NextResponse('Internal Error', { status: 500 })

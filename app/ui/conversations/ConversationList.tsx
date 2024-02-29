@@ -1,7 +1,7 @@
 'use client'
 
 import useConversation from '@/app/hooks/useConversation'
-import { ClientUser, FullConversationType } from '@/app/lib/definitions'
+import { FullConversationType } from '@/app/lib/definitions'
 import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 import clsx from 'clsx'
@@ -14,7 +14,6 @@ import { UserContext } from '@/app/context/UserContext'
 
 interface ConversationListProps {
   initialItems: FullConversationType[]
-  // users: ClientUser[]
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => {
