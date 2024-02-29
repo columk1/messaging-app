@@ -13,6 +13,9 @@ const getCurrentUser = async () => {
 
     if (!session?.user?.email) return null
 
+    // Use the server session if it contains the extended data
+    if (session?.user?.id) return session.user
+
     const currentUser = await prisma.user.findUnique({
       where: {
         email: session.user.email as string,
