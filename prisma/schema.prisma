@@ -24,8 +24,7 @@ model User {
   conversationIds Int[] @map("conversation_ids")
 
   seenMessages Message[] @relation("MessagesSeenByUser")
-  seenMessageIds String[] @map("seen_message_ids")
-  // seenMessages UserSeenMessage[]
+  // seenMessageIds String[] @map("seen_message_ids")
 
   accounts Account[]
   messages Message[]
@@ -59,7 +58,6 @@ model Conversation {
   name String?
   isGroup Boolean?
 
-  messagesIds Int[]
   messages Message[]
 
   users User[]
@@ -74,8 +72,8 @@ model Message {
   createdAt DateTime @default(now()) @map("created_at")
 
   seen User[] @relation("MessagesSeenByUser")
-  // seen UserSeenMessage[]
-  seenIds String[] @map("seen_ids")
+  
+  // seenIds String[] @map("seen_ids")
 
   conversationId Int @map("conversation_id")
   conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
