@@ -35,7 +35,12 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
 
   return (
     <>
-      <ProfileDrawer data={conversation} isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <ProfileDrawer
+        data={conversation}
+        otherUser={otherUser}
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      />
       <div className='w-full flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-white border-b-[1px] shadow-sm'>
         <div className='flex gap-3 items-center'>
           <Link

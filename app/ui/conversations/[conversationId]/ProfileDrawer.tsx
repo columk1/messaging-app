@@ -16,12 +16,12 @@ interface ProfileDrawerProps {
   data: Conversation & {
     users: ClientUser[]
   }
+  otherUser: ClientUser
   isOpen: boolean
   onClose: () => void
 }
 
-const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, isOpen, onClose }) => {
-  const otherUser = useOtherUser(data)
+const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, onClose }) => {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
   const { members } = useActiveList()
