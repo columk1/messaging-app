@@ -1,7 +1,7 @@
 'use client'
 
 import useOtherUser from '@/app/hooks/useOtherUser'
-import { Conversation, User } from '@prisma/client'
+import { Conversation, Message } from '@prisma/client'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { HiChevronLeft, HiEllipsisHorizontal } from 'react-icons/hi2'
@@ -9,10 +9,12 @@ import Avatar from '@/app/ui/Avatar'
 import ProfileDrawer from './ProfileDrawer'
 import AvatarGroup from '../../AvatarGroup'
 import useActiveList from '@/app/hooks/useActiveList'
+import { ClientUser, FullMessageType } from '@/app/lib/definitions'
 
 interface HeaderProps {
   conversation: Conversation & {
-    users: User[]
+    users: ClientUser[]
+    messages: FullMessageType[]
   }
 }
 

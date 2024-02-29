@@ -10,10 +10,11 @@ import Avatar from '@/app/ui/Avatar'
 import ConfirmModal from './ConfirmModal'
 import AvatarGroup from '../../AvatarGroup'
 import useActiveList from '@/app/hooks/useActiveList'
+import { ClientUser } from '@/app/lib/definitions'
 
 interface ProfileDrawerProps {
   data: Conversation & {
-    users: User[]
+    users: ClientUser[]
   }
   isOpen: boolean
   onClose: () => void

@@ -10,4 +10,4 @@ export type FullConversationType = Conversation & {
   messages: FullMessageType[]
 }
 
-export type ClientUser = Pick<User, 'id' | 'name' | 'email' | 'image'>
+export type ClientUser = Pick<User, 'id' | 'name' | 'email' | 'image' | 'createdAt'>
