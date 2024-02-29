@@ -1,6 +1,6 @@
 'use client'
 
-import { User } from '@prisma/client'
+import { ClientUser } from '@/app/lib/definitions'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -14,7 +14,7 @@ import clsx from 'clsx'
 interface SettingsModalProps {
   isOpen: boolean
   onClose: () => void
-  currentUser: User
+  currentUser: { name?: string | null; email?: string | null; image?: string | null } | undefined
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentUser }) => {
@@ -30,7 +30,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
     setLoading(true)
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
-    if (image !== null) formData.image = image
+    if (image) formData.image = image
 
     fetch('/api/settings', {
       method: 'POST',
