@@ -1,6 +1,6 @@
 import prisma from '@/app/lib/prisma'
 import { users } from '@/app/lib/placeholder-data'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 async function main() {
   // Insert data into the "users" table
