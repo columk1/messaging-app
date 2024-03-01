@@ -5,11 +5,11 @@ import { useState, useCallback } from 'react'
 import Avatar from '@/app/ui/Avatar'
 import { ClientUser } from '@/app/lib/definitions'
 
-interface UserBoxProps {
+interface UserListItemProps {
   user: ClientUser
 }
 
-const UserBox: React.FC<UserBoxProps> = ({ user }) => {
+const UserListItem: React.FC<UserListItemProps> = ({ user }) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
@@ -27,18 +27,16 @@ const UserBox: React.FC<UserBoxProps> = ({ user }) => {
   return (
     <button
       onClick={handleClick}
-      className='w-full relative flex items-center space-x-3 p-3 hover:bg-neutral-100 rounded-lg transition'
+      className='w-full px-5 py-2 flex items-center space-x-3 hover:bg-purple-2 rounded-sm transition'
     >
       <Avatar imageUrl={user.image!} userEmail={user?.email || ''} />
       <div className='min-w-0 flex-1'>
-        <div className='focus:outline-none'>
-          <div className='flex justify-between items-center mb-1'>
-            <p className='text-sm font-medium text-gray-900'>{user.name}</p>
-          </div>
+        <div className='flex justify-between items-center mb-1'>
+          <p className='text-sm font-medium text-gray-200'>{user.name}</p>
         </div>
       </div>
     </button>
   )
 }
 
-export default UserBox
+export default UserListItem
