@@ -20,7 +20,7 @@ const AvatarGroup: React.FC<AvatarGroupProps> = ({ imageUrls = [] }) => {
       {slicedUrls.map((url, index) => (
         <div
           key={url || index}
-          className={`absolute inline-block rounded-full overflow-hidden h-[22px] w-[22px] ${positionMap[index]}`}
+          className={`absolute inline-block rounded-full overflow-hidden border-2 border-gray-200 h-[22px] w-[22px] ${positionMap[index]}`}
         >
           <Image src={url || '/placeholder.jpg'} alt='Profile Picture' fill />
         </div>
