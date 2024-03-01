@@ -53,8 +53,8 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
     <button
       onClick={handleClick}
       className={clsx(
-        `w-full relative flex items-center p-3 space-x-3 hover:bg-neutral-100 rounded-lg transition`,
-        selected ? 'bg-neutral-100' : 'bg-white'
+        `w-full px-5 py-2 flex items-center space-x-3 hover:bg-purple-2 transition`,
+        selected ? 'bg-purple-2' : 'bg-purple-3'
       )}
     >
       {conversation.isGroup ? (
@@ -65,7 +65,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>
           <div className='flex justify-between items-center mb-1'>
-            <p className='text-md font-medium text-gray-900'>
+            <p className='text-md font-medium text-gray-200'>
               {conversation.name || otherUser?.name}
             </p>
             {lastMessage?.createdAt && (
@@ -76,8 +76,8 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
           </div>
           <p
             className={clsx(
-              `truncate text-sm text-left`,
-              hasSeen ? 'text-gray-500' : 'text-black font-medium'
+              `truncate text-xs text-left`,
+              hasSeen ? 'text-gray-400' : 'text-gray-300 font-medium'
             )}
           >
             {lastMessageText}

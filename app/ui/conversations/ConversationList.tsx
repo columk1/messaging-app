@@ -75,28 +75,28 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
       <GroupChatModal users={users} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <aside
         className={clsx(
-          `pb-20 lg:pb-0 lg:w-80 lg:min-w-80 lg:block overflow-y-auto border-r bg-white border-gray-200`,
+          `pb-20 lg:pb-0 lg:w-80 lg:min-w-80 lg:block overflow-y-auto border-r bg-purple-3 border-purple-gray`,
           isOpen ? 'hidden' : 'block w-full left-0'
         )}
       >
         <div className='px-5'>
-          <div className='flex justify-between mb-4 pt-4'>
-            <div className='text-2xl font-bold text-neutral-800'>Messages</div>
+          <div className='flex justify-between py-3 mb-4 border-b border-purple-gray'>
+            <div className='text-2xl font-bold text-gray-200'>Messages</div>
             <button
               onClick={() => setIsModalOpen(true)}
-              className='rounded-full p-2 bg-gray-100 text-gray-600 hover:opacity-75 transition'
+              className='rounded-full p-2 bg-violet-400 text-gray-200 hover:opacity-75 transition'
             >
-              <MdOutlineGroupAdd size={20} />
+              <MdOutlineGroupAdd size={16} className='' />
             </button>
           </div>
-          {items.map((item) => (
-            <ConversationListItem
-              key={item.id}
-              conversation={item}
-              selected={+conversationId === item.id}
-            />
-          ))}
         </div>
+        {items.map((item) => (
+          <ConversationListItem
+            key={item.id}
+            conversation={item}
+            selected={+conversationId === item.id}
+          />
+        ))}
       </aside>
     </>
   )

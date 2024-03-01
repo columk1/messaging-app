@@ -10,7 +10,7 @@ const MobileFooter = () => {
   const { isOpen } = useConversation()
 
   return isOpen ? null : (
-    <div className='fixed flex justify-between items-center w-full bottom-0 z-40 bg-white border-t-[1px] lg:hidden'>
+    <div className='fixed flex justify-between items-center w-full bottom-0 z-10 bg-purple-2 border-t border-purple-gray lg:hidden'>
       {routes.map((item) => (
         <MobileItem
           key={item.label}
