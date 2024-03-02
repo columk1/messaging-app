@@ -20,6 +20,7 @@ const config: Config = {
         'purple-4': '#383953',
         'purple-5': '#2b2c41',
         'purple-gray': '#5e607b',
+        'purple-violet': '#897CCC',
         'gray-350': '#B7BCC5',
       },
     },
