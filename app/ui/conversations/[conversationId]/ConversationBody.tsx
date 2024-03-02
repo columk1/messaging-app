@@ -74,7 +74,7 @@ const ConversationBody: React.FC<BodyProps> = ({ initialMessages }) => {
   // useEffect(() => bottomRef?.current?.scrollIntoView(), [messages])
 
   return (
-    <div className='flex-1 overflow-y-auto'>
+    <div className='flex-1 overflow-y-auto bg-purple-3'>
       {messages.map((message, i) => (
         <MessageItem key={message.id} data={message} isLast={i === messages.length - 1} />
       ))}

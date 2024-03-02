@@ -87,7 +87,7 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
 
   return (
     <div className='mt-8 sm:mx-auto sm:w-full sm: max-w-md'>
-      <div className='bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10'>
+      <div className='bg-purple-3 px-4 py-8 shadow sm:rounded-lg sm:px-10'>
         <form onSubmit={submitHandler} className='space-y-6'>
           {formType === 'REGISTER' && (
             <>
@@ -111,7 +111,7 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
               <div className='w-full border-t border-gray-300' />
             </div>
             <div className='relative flex justify-center text-sm'>
-              <span className='bg-white px-2 text-gray-500'>Or continue with</span>
+              <span className='bg-purple-3 px-2 text-gray-200'>Or continue with</span>
             </div>
           </div>
           <div className='flex gap-2 mt-6'>
@@ -120,7 +120,7 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
           </div>
         </div>
 
-        <div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500'>
+        <div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-300'>
           <div>{formType === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}</div>
           {/* <Link
             href={formType === 'LOGIN' ? '/register' : '/login'}

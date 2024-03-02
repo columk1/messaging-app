@@ -54,7 +54,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
       onClick={handleClick}
       className={clsx(
         `w-full px-5 py-2 flex items-center space-x-3 hover:bg-purple-2 transition`,
-        selected ? 'bg-purple-2' : 'bg-purple-3'
+        selected ? 'bg-purple-0 border-l-4 border-gray-200' : 'bg-purple-3'
       )}
     >
       {conversation.isGroup ? (
@@ -69,7 +69,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
               {conversation.name || otherUser?.name}
             </p>
             {lastMessage?.createdAt && (
-              <p className='text-xs text-gray-400 font-light'>
+              <p className='text-xs text-gray-350 font-light'>
                 {format(new Date(lastMessage.createdAt), 'p')}
               </p>
             )}
@@ -77,7 +77,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
           <p
             className={clsx(
               `truncate text-xs text-left`,
-              hasSeen ? 'text-gray-400' : 'text-gray-300 font-medium'
+              hasSeen ? 'text-gray-350' : 'text-gray-200 font-medium'
             )}
           >
             {lastMessageText}
