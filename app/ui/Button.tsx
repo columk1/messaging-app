@@ -30,7 +30,7 @@ const Button = ({
           className,
         disabled && 'opacity-50 cursor-default',
         fullWidth && 'w-full',
-        secondary ? 'text-gray-900 bg-purple-0 hover:bg-[#9496b8]' : 'text-white',
+        secondary ? 'text-gray-900 bg-purple-violet hover:bg-violet-300' : 'text-white',
         danger && 'bg-rose-500 hover:bg-rose-600 focus-visible:outline-rose-600',
         !secondary && !danger && 'bg-violet-400 hover:bg-violet-300 focus-visible:outline-sky-600'
       )}

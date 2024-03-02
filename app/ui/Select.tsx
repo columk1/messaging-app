@@ -41,17 +41,17 @@ const Select: React.FC<SelectProps> = ({ label, id, name, value, onChange, optio
             colors: {
               ...theme.colors,
               primary: 'white', // border
-              primary25: '#8b8dBd', // option hover
-              primary50: '#AbAdDd', // option active
+              primary25: '#a78bfa', // option hover
+              primary50: '#c4b5fd', // option active
               neutral0: '#6b6d9d', // rest of input container
-              neutral10: '#8b8dBd', // selected multi-value
+              neutral10: '#a78bfa', // selected multi-value
               neutral20: '#e5e7eb', // border and symbols
               neutral40: 'white', // symbol hover
               neutral50: 'lightgray', // placeholder
               neutral60: 'white', // symbol focused
               neutral80: 'white', // text, symbol active
               danger: 'white', // remove multi-value hover text
-              dangerLight: '#A4A6C8', // remove multi-value hover
+              dangerLight: '#c4b5fd', // remove multi-value hover
             },
           })}
         />
