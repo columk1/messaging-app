@@ -17,11 +17,11 @@ const MobileItem: React.FC<MobileItemProps> = ({ href, icon: Icon, active, onCli
       href={href}
       onClick={onClick}
       className={clsx(
-        'flex-1 justify-center gap-x-3 p-4 text-sm leading-6 font-semibold text-gray-500 hover:text-black hover:bg-gray-100',
-        active && 'bg-gray-100 text-black'
+        'flex-1 justify-center gap-x-3 p-4 text-sm leading-6 font-semibold text-gray-400 hover:text-gray-200 hover:bg-purple-1',
+        active && 'bg-purple-1 text-gray-200'
       )}
     >
-      <Icon className='h-6 w-6 mx-auto' />
+      <Icon className={clsx('h-6 w-6 mx-auto', active && 'text-gray-200')} />
     </Link>
   )
 }

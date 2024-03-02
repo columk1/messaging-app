@@ -45,7 +45,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
   return (
     <>
       <Transition.Root show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-50' onClose={onClose}>
+        <Dialog as='div' className='relative z-20' onClose={onClose}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-500'
@@ -72,13 +72,13 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
                         onClose={() => setIsConfirmModalOpen(false)}
                       ></ConfirmModal>
 
-                      <div className='flex flex-col h-full overflow-y-scroll bg-white py-6 shadow-xl'>
+                      <div className='flex flex-col h-full overflow-y-scroll bg-purple-1 py-6 shadow-xl'>
                         <div className='px-4 sm:px-6'>
                           <div className='flex items-start justify-end'>
                             <div className='flex items-center ml-3 h-7'>
                               <button
                                 onClick={onClose}
-                                className='rounded-md bg-white text-gray-400 hover:text-gray-500'
+                                className='rounded-md bg-violet-400 text-gray-200 hover:text-gray-100 hover:bg-violet-300'
                               >
                                 <span className='sr-only'>Close panel</span>
                                 <IoClose size={24} />
@@ -98,48 +98,48 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
                                 />
                               )}
                             </div>
-                            <div>{title}</div>
-                            <div className='text-sm text-gray-500'>{statusText}</div>
+                            <div className='text-gray-200'>{title}</div>
+                            <div className='text-sm text-gray-350'>{statusText}</div>
                             <div className='flex gap-10 my-8'>
                               <button
                                 onClick={() => {
                                   setIsConfirmModalOpen(true)
                                 }}
-                                className='flex flex-col items-center gap-3 hover:opacity-75'
+                                className='flex flex-col items-center gap-3 group text-gray-200 hover:text-gray-100'
                               >
-                                <div className='w-10 h-10 bg-neutral-100 rounded-full flex items-center justify-center'>
+                                <div className='w-10 h-10 bg-violet-400 group-hover:bg-violet-300 rounded-full flex items-center justify-center'>
                                   <IoTrash size={20} />
                                 </div>
-                                <div className='text-sm font-light text-neutral-600'>Delete</div>
+                                <div className='text-sm font-light'>Delete</div>
                               </button>
                             </div>
                             <div className='w-full py-5 sm:px-0 sm:pt-0'>
                               <dl className='space-y-8 px-4 sm:space-y-6 sm:px-6'>
                                 {data.isGroup ? (
                                   <div>
-                                    <dt className='text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0'>
+                                    <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
                                       Emails
                                     </dt>
-                                    <dd className='mt-1 text-sm text-gray-900 sm:col-span-2'>
+                                    <dd className='mt-1 text-sm text-gray-200 sm:col-span-2'>
                                       {data.users.map((user) => user.email).join(', ')}
                                     </dd>
                                   </div>
                                 ) : (
                                   <>
                                     <div>
-                                      <dt className='text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0'>
+                                      <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
                                         Email
                                       </dt>
-                                      <dd className='mt-1 text-sm text-gray-900 sm:col-span-2'>
+                                      <dd className='mt-1 text-sm text-gray-200 sm:col-span-2'>
                                         {otherUser.email}
                                       </dd>
                                     </div>
-                                    <hr />
+                                    <hr className='border-gray-350' />
                                     <div>
-                                      <dt className='text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0'>
+                                      <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
                                         Joined
                                       </dt>
-                                      <dd className='mt-1 text-sm text-gray-900 sm:col-span-2'>
+                                      <dd className='mt-1 text-sm text-gray-200 sm:col-span-2'>
                                         <time dateTime={joinedDate}>{joinedDate}</time>
                                       </dd>
                                     </div>

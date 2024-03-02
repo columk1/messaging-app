@@ -5,7 +5,7 @@ const ChatLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <Sidebar>
       <UserProvider>
-        <div className='h-full flex'>{children}</div>
+        <div className='h-full flex bg-purple-3'>{children}</div>
       </UserProvider>
     </Sidebar>
   )

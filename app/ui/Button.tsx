@@ -26,13 +26,13 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       className={clsx(
-        'flex h-10 items-center rounded-lg bg-blue-500 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 ' +
+        'flex h-10 items-center rounded-lg bg-purple-0 px-4 text-sm font-medium text-white transition-colors hover:bg-[#9496b8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 ' +
           className,
         disabled && 'opacity-50 cursor-default',
         fullWidth && 'w-full',
-        secondary ? 'text-gray-900' : 'text-white',
+        secondary ? 'text-gray-900 bg-purple-violet hover:bg-violet-300' : 'text-white',
         danger && 'bg-rose-500 hover:bg-rose-600 focus-visible:outline-rose-600',
-        !secondary && !danger && 'bg-sky-500 hover:bg-sky-600 focus-visible:outline-sky-600'
+        !secondary && !danger && 'bg-violet-400 hover:bg-violet-300 focus-visible:outline-sky-600'
       )}
     >
       {children}

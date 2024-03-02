@@ -41,10 +41,10 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       />
-      <div className='w-full flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-white border-b-[1px] shadow-sm'>
+      <div className='w-full flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-purple-2 border-b border-purple-gray shadow-sm'>
         <div className='flex gap-3 items-center'>
           <Link
-            className='lg:hidden block text-sky-500 hover:text-sky-600 transition'
+            className='lg:hidden block text-gray-350 hover:text-gray-200 transition'
             href='/conversations'
           >
             <HiChevronLeft size={32} />
@@ -55,13 +55,16 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           ) : (
             <Avatar imageUrl={otherUser?.image} userEmail={otherUser?.email || ''} />
           )}
-          <div className='flex flex-col'>
+          <div className='flex flex-col text-gray-200'>
             <div>{conversation.name || otherUser?.name}</div>
-            <div className='text-sm font-light text-neutral-500'>{statusText}</div>
+            <div className='text-sm font-light text-gray-400'>{statusText}</div>
           </div>
         </div>
         <button onClick={() => setDrawerOpen(true)}>
-          <HiEllipsisHorizontal size={32} className='text-sky-500 hover:text-sky-600 transition' />
+          <HiEllipsisHorizontal
+            size={35}
+            className='text-gray-350 hover:text-gray-200 transition'
+          />
         </button>
       </div>
     </>

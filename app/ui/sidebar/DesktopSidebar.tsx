@@ -17,7 +17,7 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {
   return (
     <>
       <SettingsModal currentUser={currentUser} isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <div className='hidden lg:fixed lg:flex lg:flex-col justify-between lg:inset-y-0 lg:left-0 lg:z-40 lg:w-20 xl:px-6 lg:overflow-y-auto lg:bg-white lg:border-r-[1px] lg:pb-4'>
+      <div className='hidden lg:fixed lg:flex lg:flex-col justify-between lg:inset-y-0 lg:left-0 lg:z-10 lg:w-20 xl:px-6 lg:overflow-y-auto lg:bg-purple-2 lg:border-r border-purple-gray lg:pb-4'>
         <nav className='flex flex-col justify-between mt-4'>
           <ul className='flex flex-col items-center space-y-1'>
             {routes.map((item) => (

@@ -37,9 +37,9 @@ const MessageForm = () => {
   }
 
   return (
-    <div className='py-4 px-4 bg-white border-t flex items-center gap-2 lg:gap-4 w-full'>
+    <div className='py-4 px-4 bg-purple-3 border-t border-purple-gray flex items-center gap-2 lg:gap-4 w-full'>
       <CldUploadButton options={{ maxFiles: 1 }} onUpload={handleUpload} uploadPreset='xi5pas5g'>
-        <HiPhoto size={30} className='text-sky-500' />
+        <HiPhoto size={30} className='text-gray-200' />
       </CldUploadButton>
       <form onSubmit={handleSubmit} className='w-full flex items-center gap-2 lg:gap-4'>
         <MessageInput
@@ -49,7 +49,7 @@ const MessageForm = () => {
           required
           placeholder='Write a message'
         />
-        <button className='rounded-full p-2 bg-sky-500 hover:bg-sky-600 transition'>
+        <button className='rounded-full p-2 bg-violet-400 hover:bg-violet-300 transition'>
           <HiPaperAirplane size={18} className='text-white' />
         </button>
       </form>
