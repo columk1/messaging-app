@@ -14,7 +14,12 @@ interface Credentials {
 export const {
   handlers: { GET, POST },
   auth,
+  signIn,
+  signOut,
 } = NextAuth({
+  pages: {
+    signIn: '/login',
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
@@ -91,7 +96,4 @@ export const {
     strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: '/login',
-  },
 })
