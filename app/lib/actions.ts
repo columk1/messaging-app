@@ -1,11 +1,12 @@
 'use server'
 
 import prisma from '@/app/lib/prisma'
-import { getServerSession } from 'next-auth'
+import { auth } from '@/app/lib/auth'
+// import { getServerSession } from 'next-auth'
 
-import { authOptions } from '@/app/lib/auth'
+// import { authOptions } from '@/app/lib/auth'
 
-const getSession = async () => await getServerSession(authOptions)
+const getSession = async () => await auth()
 
 const getCurrentUser = async () => {
   try {

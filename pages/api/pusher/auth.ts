@@ -1,14 +1,15 @@
 'use server'
 
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getServerSession } from 'next-auth'
+import { auth } from '@/app/lib/auth'
+// import { getServerSession } from 'next-auth'
 
 import { pusherServer } from '@/app/lib/pusher'
-import { authOptions } from '@/app/lib/auth'
+// import { authOptions } from '@/app/lib/auth'
 
 // Auth function for presence channel
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getServerSession(req, res, authOptions)
+  const session = await auth()
 
   if (!session?.user?.email) {
     return res.status(401).json({ error: 'Unauthorized' })
