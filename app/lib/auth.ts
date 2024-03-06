@@ -1,12 +1,20 @@
 import bcrypt from 'bcryptjs'
-import { AuthOptions } from 'next-auth'
+import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from '@/app/lib/prisma'
 
-export const authOptions: AuthOptions = {
+interface Credentials {
+  email: string
+  password: string
+}
+
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
@@ -14,7 +22,7 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
       profile: (profile) => {
         return {
-          id: profile.id,
+          id: profile.id.toString(),
           name: profile.name,
           email: profile.email,
           image: profile.avatar_url,
@@ -40,18 +48,23 @@ export const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        // const validatedFields = LoginSchema.safeParse(credentials)
+        // if (validatedFields.success) {
+        //   const { email, password } = validatedFields.data
+        // }
+        const { email, password } = credentials as Credentials
+        if (!email || !password) {
           throw new Error('Invalid credentials')
         }
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email,
+            email: email,
           },
         })
         if (!user || !user?.password) {
           throw new Error('Invalid credentials')
         }
-        const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
+        const passwordsMatch = await bcrypt.compare(password, user.password)
         if (!passwordsMatch) {
           throw new Error('Invalid password')
         }
@@ -78,4 +91,7 @@ export const authOptions: AuthOptions = {
     strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
-}
+  pages: {
+    signIn: '/login',
+  },
+})
