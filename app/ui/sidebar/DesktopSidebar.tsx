@@ -5,9 +5,11 @@ import { useState } from 'react'
 import DesktopItem from './DesktopItem'
 import Avatar from '../Avatar'
 import SettingsModal from './SettingsModal'
+import { SessionUser } from '@/app/lib/definitions'
+import { User } from 'next-auth'
 
 interface DesktopSidebarProps {
-  currentUser: { name?: string | null; email?: string | null; image?: string | null } | undefined
+  currentUser: User | null
 }
 
 const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {

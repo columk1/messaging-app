@@ -10,11 +10,12 @@ import Image from 'next/image'
 import { CldUploadButton } from 'next-cloudinary'
 import Button from '@/app/ui/Button'
 import clsx from 'clsx'
+import { User } from 'next-auth'
 
 interface SettingsModalProps {
   isOpen: boolean
   onClose: () => void
-  currentUser: { name?: string | null; email?: string | null; image?: string | null } | undefined
+  currentUser: User | null
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentUser }) => {
