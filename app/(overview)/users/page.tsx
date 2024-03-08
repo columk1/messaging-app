@@ -1,4 +1,4 @@
-import EmptyState from '../../../ui/EmptyState'
+import EmptyState from '../../ui/EmptyState'
 import UserList from '@/app/ui/users/UserList'
 
 const Users = async () => {
