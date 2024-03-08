@@ -18,19 +18,25 @@ const getCurrentUser = async () => {
 
     // Unlikely to reach here
     return null
-    // const currentUser = await prisma.user.findUnique({
-    //   where: {
-    //     email: session.user.email as string,
-    //   },
-    //   select: {
-    //     id: true,
-    //     name: true,
-    //     email: true,
-    //     image: true,
-    //   },
-    // })
-    // return currentUser ?? null
   } catch (error) {
+    return null
+  }
+}
+
+const getUserByEmail = async (email: string) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        image: true,
+      },
+    })
+
+    return user
+  } catch {
     return null
   }
 }
@@ -143,4 +149,12 @@ const getMessages = async (id: string) => {
   }
 }
 
-export { getSession, getCurrentUser, getUsers, getConversations, getConversationById, getMessages }
+export {
+  getSession,
+  getCurrentUser,
+  getUserByEmail,
+  getUsers,
+  getConversations,
+  getConversationById,
+  getMessages,
+}
