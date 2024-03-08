@@ -62,6 +62,7 @@ const getUsers = async () => {
         name: true,
         email: true,
         image: true,
+        createdAt: true,
       },
     })
     return users
