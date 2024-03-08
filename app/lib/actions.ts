@@ -1,11 +1,30 @@
 'use server'
 
 import prisma from '@/app/lib/prisma'
-import { auth } from '@/app/lib/auth'
+import { auth, signOut } from '@/auth'
 // import { getServerSession } from 'next-auth'
 
 // import { authOptions } from '@/app/lib/auth'
 
+const getUserByEmail = async (email: string) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { email } })
+
+    return user
+  } catch {
+    return null
+  }
+}
+
+export const getUserById = async (id: string) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id } })
+
+    return user
+  } catch {
+    return null
+  }
+}
 const getSession = async () => await auth()
 
 const getCurrentUser = async () => {
@@ -144,4 +163,17 @@ const getMessages = async (id: string) => {
   }
 }
 
-export { getSession, getCurrentUser, getUsers, getConversations, getConversationById, getMessages }
+const logout = async () => {
+  await signOut()
+}
+
+export {
+  getUserByEmail,
+  getSession,
+  getCurrentUser,
+  getUsers,
+  getConversations,
+  getConversationById,
+  getMessages,
+  logout,
+}
