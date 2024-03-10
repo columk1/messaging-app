@@ -13,8 +13,14 @@ interface SettingsNavProps {
 
 const SettingsNav: React.FC<SettingsNavProps> = ({ user }) => {
   const path = usePathname()
+  const isBasePath = path === '/settings'
   return (
-    <aside className='pb-20 lg:pb-0 lg:w-80 lg:block overflow-y-auto bg-purple-3 border-r border-purple-gray block w-full'>
+    <aside
+      className={clsx(
+        `pb-20 lg:pb-0 lg:w-80 block overflow-y-auto bg-purple-3 border-r border-purple-gray w-full`,
+        !isBasePath && 'hidden lg:block'
+      )}
+    >
       <div className='px-5'>
         <div className='text-2xl font-bold text-gray-200 py-3 mb-4 border-b border-purple-gray'>
           Settings
