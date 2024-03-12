@@ -60,7 +60,11 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, trigger, session, user }) {
+      // If updated, return token with updated properties from session
+      if (trigger === 'update' && session) {
+        return { ...token, ...session.user }
+      }
       if (user) {
         token.id = user.id
       }
@@ -69,6 +73,9 @@ export const authOptions: AuthOptions = {
     async session({ session, token, user }) {
       if (session.user) {
         session.user.id = token.id as string
+        // Set user name and image from token to catch session updates from client
+        session.user.name = token.name
+        session.user.image = token?.image as string
       }
       return session
     },
