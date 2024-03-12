@@ -13,12 +13,12 @@ const Avatar: React.FC<AvatarProps> = ({ imageUrl, userEmail }) => {
   const isActive = members.indexOf(userEmail) !== -1
 
   return (
-    <div className='relative h-9 w-9 md:h-11 md:w-11'>
+    <div className='relative h-9 w-9 md:h-11 md:w-11 '>
       <div className='relative inline-block rounded-full overflow-hidden border-2 border-gray-100'>
         <img
           src={imageUrl || '/placeholder.jpg'}
           alt='Profile Picture'
-          className='object-fit w-full h-full'
+          className='object-cover aspect-square'
         />
       </div>
       {isActive ? (
