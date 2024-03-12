@@ -32,7 +32,7 @@ const useRoutes = () => {
         label: 'Settings',
         href: '/settings',
         icon: HiOutlineCog8Tooth,
-        active: pathname === '/settings',
+        active: pathname?.startsWith('/settings'),
       },
       {
         label: 'Logout',
