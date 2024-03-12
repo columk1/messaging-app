@@ -33,8 +33,8 @@ const SettingsNav: React.FC<SettingsNavProps> = ({ user }) => {
             <Link
               href={'/settings/profile'}
               className={clsx(
-                `w-full px-5 py-2 flex items-center space-x-3 rounded-sm transition hover:bg-purple-2`,
-                path === '/settings/profile' && 'bg-purple-2'
+                `w-full px-5 py-2 flex items-center space-x-3 border-l-4 rounded-sm transition hover:bg-purple-2`,
+                path === '/settings/profile' ? 'bg-purple-2 border-gray-200' : 'border-transparent'
               )}
             >
               <Avatar imageUrl={user?.image} userEmail={user?.email || ''} />
@@ -51,8 +51,8 @@ const SettingsNav: React.FC<SettingsNavProps> = ({ user }) => {
             <Link
               href='/settings/account'
               className={clsx(
-                `w-full px-5 py-2 flex items-center space-x-3 rounded-sm transition hover:bg-purple-2`,
-                path === '/settings/account' && 'bg-purple-2'
+                `w-full px-5 py-2 flex items-center space-x-3 border-l-4 rounded-sm transition hover:bg-purple-2`,
+                path === '/settings/account' ? 'bg-purple-2 border-gray-200' : 'border-transparent'
               )}
             >
               <div className='min-w-0 flex-1'>

@@ -53,8 +53,8 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
     <button
       onClick={handleClick}
       className={clsx(
-        `w-full px-5 py-2 flex items-center space-x-3 hover:bg-purple-2 transition`,
-        selected ? 'bg-purple-0 border-l-4 border-gray-200' : 'bg-purple-3'
+        `w-full px-5 py-2 flex items-center space-x-3 rounded-sm border-l-4 hover:bg-purple-2 transition`,
+        selected ? 'bg-purple-0 border-gray-200' : 'bg-purple-3 border-transparent'
       )}
     >
       {conversation.isGroup ? (
