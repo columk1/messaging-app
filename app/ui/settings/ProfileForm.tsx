@@ -5,16 +5,18 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import Input from '@/app/ui/Input'
-import Image from 'next/image'
 import { CldUploadButton } from 'next-cloudinary'
 import clsx from 'clsx'
 import Button from '@/app/ui/Button'
+
+import { useSession } from 'next-auth/react'
 
 interface SettingsFormProps {
   user: User | null
 }
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
+  const { data: session, update } = useSession()
   console.log(user)
   const router = useRouter()
   const [image, setImage] = useState(user?.image)
@@ -24,7 +26,21 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
     setImage(result.info.secure_url)
   }
 
+  const handleUpdateSession = async (formData: any) => {
+    const newSession = {
+      ...session,
+      user: {
+        ...session?.user,
+        name: formData.name,
+        image: formData.image || user?.image,
+      },
+    }
+    console.log(newSession)
+    await update(newSession)
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setLoading(true)
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
@@ -35,7 +51,9 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
       body: JSON.stringify(formData),
     })
       .then(() => {
-        router.refresh()
+        handleUpdateSession(formData).then(() => {
+          router.refresh()
+        })
       })
       .catch(() => toast.error('Something went wrong!'))
       .finally(() => setLoading(false))
@@ -60,10 +78,10 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
               Profile Picture
             </label>
             <div className='mt-2 p-4 flex gap-4 rounded-md border border-gray-500'>
-              <Image
+              <img
                 width='48'
                 height='48'
-                className='rounded-full'
+                className='rounded-full aspect-square object-cover'
                 src={image || user?.image || '/images/placeholder.jpg'}
                 alt='Avatar'
               />

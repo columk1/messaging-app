@@ -10,6 +10,7 @@ import { CldUploadButton } from 'next-cloudinary'
 import Button from '@/app/ui/Button'
 import clsx from 'clsx'
 import { User } from 'next-auth'
+import { useSession } from 'next-auth/react'
 
 interface SettingsModalProps {
   isOpen: boolean
@@ -22,11 +23,27 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
   const [image, setImage] = useState(currentUser?.image)
   const [loading, setLoading] = useState(false)
 
+  const { data: session, update } = useSession()
+
   const handleUpload = (result: any) => {
     setImage(result.info.secure_url)
   }
 
+  const handleUpdateSession = async (formData: any) => {
+    const newSession = {
+      ...session,
+      user: {
+        ...session?.user,
+        name: formData.name,
+        image: formData.image || currentUser?.image,
+      },
+    }
+    console.log(newSession)
+    await update(newSession)
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     setLoading(true)
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
@@ -37,7 +54,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
       body: JSON.stringify(formData),
     })
       .then(() => {
-        router.refresh()
+        handleUpdateSession(formData).then(() => {
+          router.refresh()
+        })
         onClose()
       })
       .catch(() => toast.error('Something went wrong!'))
@@ -65,7 +84,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
                 <Image
                   width='48'
                   height='48'
-                  className='rounded-full'
+                  className='rounded-full aspect-square'
                   src={image || currentUser?.image || '/images/placeholder.jpg'}
                   alt='Avatar'
                 />
@@ -89,7 +108,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
           </div>
         </div>
         <div className='mt-12 flex items-center justify-end gap-2'>
-          <Button onClick={onClose} secondary disabled={loading}>
+          <Button type='button' onClick={onClose} secondary disabled={loading}>
             Cancel
           </Button>
           <Button type='submit' disabled={loading}>
