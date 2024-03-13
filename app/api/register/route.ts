@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 
 const SignUpSchema = z.object({
-  name: z.string(),
+  name: z.string().trim().min(1, { message: 'Name is required' }),
   email: z.string().email({ message: 'Invalid email' }),
   password: z.string().min(6, { message: 'Password must be at least 8 characters' }),
 })

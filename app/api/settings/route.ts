@@ -5,7 +5,7 @@ import prisma from '@/app/lib/prisma'
 import { z } from 'zod'
 
 const SettingsSchema = z.object({
-  name: z.string().optional(),
+  name: z.string().trim().min(1).optional(),
   image: z.string().optional(),
 })
 
