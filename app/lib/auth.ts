@@ -8,8 +8,7 @@ import prisma from '@/app/lib/prisma'
 import { z } from 'zod'
 
 const SessionUserSchema = z.object({
-  id: z.string().optional(),
-  name: z.string(),
+  name: z.string().trim().min(1),
   email: z.string().email(),
   image: z.string().optional(),
 })
@@ -74,7 +73,8 @@ export const authOptions: AuthOptions = {
       if (trigger === 'update' && session) {
         const validatedSession = SessionUserSchema.safeParse(session.user)
         if (validatedSession.success) {
-          return { ...token, ...validatedSession.data }
+          const { name, image } = validatedSession.data // Don't include email
+          return { ...token, name, image }
         }
       }
       if (user) {
