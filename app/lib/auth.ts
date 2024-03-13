@@ -40,8 +40,9 @@ export const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
+        const errorMsg = 'Incorrect email or password'
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials')
+          throw new Error(errorMsg)
         }
         const user = await prisma.user.findUnique({
           where: {
@@ -49,11 +50,11 @@ export const authOptions: AuthOptions = {
           },
         })
         if (!user || !user?.password) {
-          throw new Error('Invalid credentials')
+          throw new Error(errorMsg)
         }
         const passwordsMatch = await bcrypt.compare(credentials.password, user.password)
         if (!passwordsMatch) {
-          throw new Error('Invalid password')
+          throw new Error(errorMsg)
         }
         return { ...user, id: user.id.toString() } // Solves type error. Can also usePromise<any> as return type
       },

@@ -49,7 +49,8 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
           body: JSON.stringify(formData),
         })
         if (!res.ok) {
-          throw new Error('Failed to submit the data. Please try again.')
+          const data = await res.json()
+          toast.error(data.message || 'Failed to submit the data. Please try again.')
         } else {
           signIn('credentials', formData)
         }
@@ -67,7 +68,7 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
           redirect: false,
         })
         if (!res?.ok) {
-          toast.error('Invalid credentials')
+          toast.error(res?.error || 'Incorrect username or password')
         } else {
           toast.success('Login successful')
           router.push('/users')
