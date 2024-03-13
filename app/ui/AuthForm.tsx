@@ -12,7 +12,6 @@ import { BsGithub, BsGoogle } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 
 type FormType = 'LOGIN' | 'REGISTER'
 
@@ -41,9 +40,8 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
     setLoading(true)
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
-
-    if (formType === 'REGISTER') {
-      try {
+    try {
+      if (formType === 'REGISTER') {
         const res = await fetch('/api/register', {
           method: 'POST',
           body: JSON.stringify(formData),
@@ -54,15 +52,8 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
         } else {
           signIn('credentials', formData)
         }
-      } catch (error) {
-        console.log(error)
-        toast.error('Something went wrong')
-      } finally {
-        setLoading(false)
-      }
-    } else {
-      // LOGIN route
-      try {
+      } else {
+        // LOGIN FORM
         const res = await signIn('credentials', {
           ...formData,
           redirect: false,
@@ -73,11 +64,12 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
           toast.success('Login successful')
           router.push('/users')
         }
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoading(false)
       }
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -89,23 +81,64 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
   return (
     <div className='mt-8 sm:mx-auto sm:w-full sm: max-w-md'>
       <div className='bg-purple-3 px-4 py-8 shadow sm:rounded-lg sm:px-10'>
-        <form onSubmit={submitHandler} className='space-y-6'>
-          {formType === 'REGISTER' && (
-            <>
-              <Input type='text' id='name' name='name' label='Name' required={true} errors={[]} />
-            </>
-          )}
-          <Input type='text' id='email' name='email' label='Email' required={true} errors={[]} />
-          <Input
-            type='password'
-            id='password'
-            name='password'
-            label='Password'
-            required={true}
-            errors={[]}
-          />
-          <SubmitButton title={formType === 'LOGIN' ? 'Login' : 'Sign Up'} />
-        </form>
+        {formType === 'REGISTER' ? (
+          <form onSubmit={submitHandler} className='space-y-6'>
+            <Input
+              type='text'
+              id='name'
+              name='name'
+              label='Name'
+              placeholder=''
+              required={true}
+              errors={[]}
+            />
+            <Input
+              type='email'
+              id='email'
+              name='email'
+              label='Email'
+              placeholder=''
+              required={true}
+              errors={[]}
+              errorMsg={'Please enter a valid email address'}
+            />
+            <Input
+              type='password'
+              id='password'
+              name='password'
+              label='Password'
+              placeholder=''
+              required={true}
+              min={6}
+              errors={[]}
+              errorMsg={'Password must be at least 6 characters long'}
+            />
+            <SubmitButton title={'Sign Up'} />
+          </form>
+        ) : (
+          // LOGIN FORM
+          <form onSubmit={submitHandler} className='space-y-6'>
+            <Input
+              type='text'
+              id='email'
+              name='email'
+              label='Email'
+              placeholder=''
+              required={true}
+              errors={[]}
+            />
+            <Input
+              type='password'
+              id='password'
+              name='password'
+              label='Password'
+              placeholder=''
+              required={true}
+              errors={[]}
+            />
+            <SubmitButton title={'Login'} />
+          </form>
+        )}
         <div className='mt-6'>
           <div className='relative'>
             <div className='absolute flex items-center inset-0'>
@@ -123,14 +156,9 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
 
         <div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-300'>
           <div>{formType === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}</div>
-          {/* <Link
-            href={formType === 'LOGIN' ? '/register' : '/login'}
-            className='underline cursor-pointer'
-          > */}
           <button onClick={toggleFormType} className='underline cursor-pointer'>
             {formType === 'LOGIN' ? 'Sign Up' : 'Login'}
           </button>
-          {/* </Link> */}
         </div>
       </div>
     </div>
@@ -139,8 +167,12 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
 
 function SubmitButton({ title }: { title: string }) {
   const { pending } = useFormStatus()
+  // Add group class to form to disable button using CSS when form is invalid
   return (
-    <Button className='mt-4 w-full flex justify-center' aria-disabled={pending}>
+    <Button
+      className='mt-4 w-full flex justify-center group-invalid:pointer-events-none group-invalid:opacity-50'
+      aria-disabled={pending}
+    >
       {title}
       {/* <ArrowRightIcon className='ml-auto h-5 w-5 text-gray-50' /> */}
     </Button>
