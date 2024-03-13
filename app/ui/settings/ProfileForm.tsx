@@ -82,7 +82,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
                 width='48'
                 height='48'
                 className='rounded-full aspect-square object-cover'
-                src={image || user?.image || '/images/placeholder.jpg'}
+                src={image || '/placeholder.jpg'}
                 alt='Avatar'
               />
               <CldUploadButton

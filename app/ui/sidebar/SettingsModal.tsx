@@ -85,7 +85,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
                   width='48'
                   height='48'
                   className='rounded-full aspect-square'
-                  src={image || currentUser?.image || '/images/placeholder.jpg'}
+                  src={image || '/placeholder.jpg'}
                   alt='Avatar'
                 />
                 <CldUploadButton
