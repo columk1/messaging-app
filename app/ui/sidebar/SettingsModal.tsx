@@ -56,6 +56,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
       .then(() => {
         handleUpdateSession(formData).then(() => {
           router.refresh()
+          toast.success('Saved')
         })
         onClose()
       })

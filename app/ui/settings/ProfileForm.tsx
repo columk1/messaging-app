@@ -53,6 +53,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
       .then(() => {
         handleUpdateSession(formData).then(() => {
           router.refresh()
+          toast.success('Saved')
         })
       })
       .catch(() => toast.error('Something went wrong!'))
