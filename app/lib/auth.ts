@@ -5,6 +5,14 @@ import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import prisma from '@/app/lib/prisma'
+import { z } from 'zod'
+
+const SessionUserSchema = z.object({
+  id: z.string().optional(),
+  name: z.string(),
+  email: z.string().email(),
+  image: z.string().optional(),
+})
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -64,7 +72,10 @@ export const authOptions: AuthOptions = {
     async jwt({ token, trigger, session, user }) {
       // If updated, return token with updated properties from session
       if (trigger === 'update' && session) {
-        return { ...token, ...session.user }
+        const validatedSession = SessionUserSchema.safeParse(session.user)
+        if (validatedSession.success) {
+          return { ...token, ...validatedSession.data }
+        }
       }
       if (user) {
         token.id = user.id
