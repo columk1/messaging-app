@@ -23,6 +23,9 @@ export async function POST(request: Request, { params }: { params: Params }) {
       },
       include: {
         messages: {
+          orderBy: {
+            id: 'asc',
+          },
           include: {
             seen: true,
           },
@@ -43,7 +46,8 @@ export async function POST(request: Request, { params }: { params: Params }) {
 
     // TODO: Reduce calls to this query
     console.log('Updating Seen Status')
-    console.log(currentUser.id)
+    console.log(currentUser.email)
+    console.log(lastMessage.id)
     const updatedMessage = await prisma.message.update({
       where: {
         id: lastMessage.id,
@@ -61,18 +65,16 @@ export async function POST(request: Request, { params }: { params: Params }) {
       },
     })
 
-    // console.log('Updated Message: ', updatedMessage)
+    // Skip the pusher trigger if the user has already seen the message
+    if (lastMessage.seen.some((user) => user.id === currentUser.id)) {
+      return new NextResponse(null, { status: 204 })
+    }
 
     // Update seen status in the conversation list
     await pusherServer.trigger(currentUser.email, 'conversation:update', {
       id: +conversationId,
       messages: [updatedMessage],
     })
-
-    // Skip the pusher trigger if the user has already seen the message
-    if (lastMessage.seen.some((user) => user.id === currentUser.id)) {
-      return new NextResponse(null, { status: 204 })
-    }
 
     // Update seen status in the main conversation window
     await pusherServer.trigger(conversationId!, 'message:update', updatedMessage)

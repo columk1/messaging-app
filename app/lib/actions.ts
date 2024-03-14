@@ -88,6 +88,9 @@ const getConversations = async () => {
       include: {
         users: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
         messages: {
+          orderBy: {
+            id: 'asc',
+          },
           include: {
             sender: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
             seen: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
