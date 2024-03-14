@@ -30,8 +30,10 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users 
     })
       .then((res) => {
         if (res.ok) {
-          router.refresh()
-          onClose()
+          const data = res.json().then((data) => {
+            router.push(`/conversations/${data.id}`)
+            onClose()
+          })
         } else {
           throw new Error(res.statusText)
         }
