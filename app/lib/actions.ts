@@ -2,7 +2,6 @@
 
 import prisma from '@/app/lib/prisma'
 import { getServerSession } from 'next-auth'
-
 import { authOptions } from '@/app/lib/auth'
 
 const getSession = async () => await getServerSession(authOptions)
@@ -115,6 +114,9 @@ const getConversationById = async (id: string) => {
       include: {
         users: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
         messages: {
+          orderBy: {
+            id: 'asc',
+          },
           include: {
             sender: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
             seen: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
