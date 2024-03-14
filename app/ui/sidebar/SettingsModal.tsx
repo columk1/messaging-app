@@ -38,7 +38,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentU
         image: formData.image || currentUser?.image,
       },
     }
-    console.log(newSession)
     await update(newSession)
   }
 

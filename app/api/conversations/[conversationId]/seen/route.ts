@@ -61,7 +61,7 @@ export async function POST(request: Request, { params }: { params: Params }) {
       },
     })
 
-    console.log('Updated Message: ', updatedMessage)
+    // console.log('Updated Message: ', updatedMessage)
 
     // Update seen status in the conversation list
     await pusherServer.trigger(currentUser.email, 'conversation:update', {

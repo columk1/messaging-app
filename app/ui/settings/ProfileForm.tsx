@@ -35,7 +35,6 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
         image: formData.image || user?.image,
       },
     }
-    console.log(newSession)
     await update(newSession)
   }
 
