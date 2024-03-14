@@ -9,11 +9,11 @@ import Avatar from '@/app/ui/Avatar'
 import ProfileDrawer from './ProfileDrawer'
 import AvatarGroup from '../../AvatarGroup'
 import useActiveList from '@/app/hooks/useActiveList'
-import { ClientUser, FullMessageType } from '@/app/lib/definitions'
+import { ConversationUser, FullMessageType } from '@/app/lib/definitions'
 
 interface HeaderProps {
   conversation: Conversation & {
-    users: ClientUser[]
+    users: ConversationUser[]
     messages: FullMessageType[]
   }
 }

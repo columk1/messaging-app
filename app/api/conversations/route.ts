@@ -34,9 +34,9 @@ export async function POST(request: Request) {
           },
           userIds: [currentUser.id, ...members.map((member: { value: string }) => member.value)],
         },
-        // Populate the users field with the user object (instead of the id)
         include: {
-          users: true,
+          // Id is used for routing on client, the rest for pushing new conversations
+          users: { select: { id: true, name: true, email: true, image: true } },
         },
       })
       newConversation.users.forEach((user) => {
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
           userIds: [currentUser.id, userId],
         },
         include: {
-          users: true,
+          users: { select: { id: true, name: true, email: true, image: true } },
         },
       })
 

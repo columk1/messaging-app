@@ -12,7 +12,6 @@ export async function POST(request: Request) {
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
-    // TODO: Remove include blocks later if not used
     const newMessage = await prisma.message.create({
       data: {
         body: message,
@@ -34,8 +33,8 @@ export async function POST(request: Request) {
         },
       },
       include: {
-        seen: true,
-        sender: true, // So that we can compare the session email to the sender's email
+        sender: { select: { name: true, email: true, image: true } },
+        seen: { select: { email: true } },
       },
     })
 
@@ -52,13 +51,13 @@ export async function POST(request: Request) {
         },
       },
       include: {
-        users: true,
+        users: { select: { id: true, name: true, email: true, image: true } },
         messages: {
           orderBy: {
             id: 'asc',
           },
           include: {
-            seen: true,
+            seen: { select: { email: true } },
           },
         },
       },

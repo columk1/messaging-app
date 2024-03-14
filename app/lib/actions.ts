@@ -61,7 +61,6 @@ const getUsers = async () => {
         name: true,
         email: true,
         image: true,
-        createdAt: true,
       },
     })
     return users
@@ -92,8 +91,8 @@ const getConversations = async () => {
             id: 'asc',
           },
           include: {
-            sender: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
-            seen: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+            sender: { select: { name: true, email: true, image: true } },
+            seen: { select: { email: true } },
           },
         },
       },
@@ -121,8 +120,8 @@ const getConversationById = async (id: string) => {
             id: 'asc',
           },
           include: {
-            sender: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
-            seen: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+            sender: { select: { name: true, email: true, image: true } },
+            seen: { select: { email: true } },
           },
         },
       },
@@ -141,8 +140,8 @@ const getMessages = async (id: string) => {
         conversationId: +id,
       },
       include: {
-        sender: true,
-        seen: true,
+        sender: { select: { name: true, email: true, image: true } },
+        seen: { select: { email: true } },
       },
       orderBy: {
         createdAt: 'asc',

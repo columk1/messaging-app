@@ -17,7 +17,6 @@ interface SettingsFormProps {
 
 const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
   const { data: session, update } = useSession()
-  console.log(user)
   const router = useRouter()
   const [image, setImage] = useState(user?.image)
   const [loading, setLoading] = useState(false)

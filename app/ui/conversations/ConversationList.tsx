@@ -52,7 +52,6 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
 
         // If no new message (seen status change only) update the conversation without re-ordering
         if (conversationToUpdate.messages.some((item) => item.id === conversation.messages[0].id)) {
-          console.log('no new message')
           return prevItems.map((item) => (item.id === conversation.id ? updatedConversation : item))
         }
 

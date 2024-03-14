@@ -27,10 +27,10 @@ export async function POST(request: Request, { params }: { params: Params }) {
             id: 'asc',
           },
           include: {
-            seen: true,
+            seen: { select: { id: true, email: true } },
           },
         },
-        users: true,
+        users: { select: { id: true, name: true, email: true, image: true } },
       },
     })
     if (!conversation) {
@@ -53,8 +53,8 @@ export async function POST(request: Request, { params }: { params: Params }) {
         id: lastMessage.id,
       },
       include: {
-        sender: { select: { id: true, name: true, email: true, image: true } },
-        seen: { select: { id: true, name: true, email: true, image: true } },
+        sender: { select: { name: true, email: true, image: true } },
+        seen: { select: { email: true } },
       },
       data: {
         seen: {
