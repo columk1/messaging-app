@@ -1,6 +1,5 @@
 'use client'
 
-import useOtherUser from '@/app/hooks/useOtherUser'
 import { Conversation, User } from '@prisma/client'
 import { format } from 'date-fns'
 import { Fragment, useMemo, useState } from 'react'
@@ -117,22 +116,22 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
                               <dl className='space-y-8 px-4 sm:space-y-6 sm:px-6'>
                                 {data.isGroup ? (
                                   <div>
-                                    <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
+                                    {/* <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
                                       Emails
                                     </dt>
                                     <dd className='mt-1 text-sm text-gray-200 sm:col-span-2'>
                                       {data.users.map((user) => user.email).join(', ')}
-                                    </dd>
+                                    </dd> */}
                                   </div>
                                 ) : (
                                   <>
                                     <div>
-                                      <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
+                                      {/* <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
                                         Email
                                       </dt>
                                       <dd className='mt-1 text-sm text-gray-200 sm:col-span-2'>
                                         {otherUser.email}
-                                      </dd>
+                                      </dd> */}
                                     </div>
                                     <hr className='border-gray-350' />
                                     <div>
