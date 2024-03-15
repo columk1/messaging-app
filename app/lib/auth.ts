@@ -38,6 +38,7 @@ export const authOptions: AuthOptions = {
           id: profile.sub,
           name: profile.given_name + ' ' + profile.family_name,
           email: profile.email,
+          username: profile.given_name + profile.family_name,
           image: profile.picture,
         }
       },
@@ -65,18 +66,34 @@ export const authOptions: AuthOptions = {
         if (!passwordsMatch) {
           throw new Error(errorMsg)
         }
-        return { ...user, id: user.id.toString(), username: user.username } // Solves type error. Can also usePromise<any> as return type
+        return { ...user, id: user.id.toString(), username: user.username.toString() } // Solves type error. Can also usePromise<any> as return type
       },
     }),
   ],
   callbacks: {
+    // Callback to add a username field to the db from 0auth providers
+    // Could query db and redirect to a page to set a custom username here instead
+    async signIn({ user, profile, account }) {
+      if (account && profile) {
+        // user.provider = account.provider;
+        switch (account.provider) {
+          case 'github':
+            user.username = profile.login
+            break
+          case 'google':
+            user.username = profile.given_name + profile.family_name
+            break
+        }
+      }
+      return true
+    },
     async jwt({ token, trigger, session, user }) {
       // If updated, return token with updated properties from session
       if (trigger === 'update' && session) {
         const validatedSession = SessionUserSchema.safeParse(session.user)
         if (validatedSession.success) {
           const { name, image } = validatedSession.data // Don't include email
-          return { ...token, name, image }
+          return { ...token, name, picture: image }
         }
       }
       if (user) {
@@ -88,10 +105,10 @@ export const authOptions: AuthOptions = {
     async session({ session, token, user }) {
       if (session.user) {
         session.user.id = token.id as string
-        session.user.username = token.username
+        session.user.username = token.username as string
         // Set user name and image from token to catch session updates from client
         session.user.name = token.name
-        session.user.image = token?.image as string
+        session.user.image = token?.picture as string
       }
       return session
     },
