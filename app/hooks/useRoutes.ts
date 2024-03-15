@@ -23,10 +23,10 @@ const useRoutes = () => {
         active: pathname === '/conversations' || !!conversationId,
       },
       {
-        label: 'Users',
-        href: '/users',
+        label: 'Contacts',
+        href: '/contacts',
         icon: HiOutlineUsers,
-        active: pathname === '/users',
+        active: pathname?.startsWith('/contacts'),
       },
       {
         label: 'Settings',

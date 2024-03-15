@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
-const Home = () => redirect('/users')
+const Home = () => redirect('/conversations')
 
 export default Home
