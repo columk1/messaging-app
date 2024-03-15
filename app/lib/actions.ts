@@ -121,7 +121,7 @@ const getConversationById = async (id: string) => {
           },
           include: {
             sender: { select: { name: true, username: true, image: true } },
-            seen: { select: { useusername: true } },
+            seen: { select: { username: true } },
           },
         },
       },
