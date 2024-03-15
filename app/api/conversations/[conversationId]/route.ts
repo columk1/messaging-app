@@ -32,8 +32,8 @@ export async function DELETE(request: Request, { params }: { params: Params }) {
     })
 
     existingConversation.users.forEach((user) => {
-      if (user.email) {
-        pusherServer.trigger(user.email, 'conversation:remove', +conversationId)
+      if (user.username) {
+        pusherServer.trigger(user.username, 'conversation:remove', +conversationId)
       }
     })
 

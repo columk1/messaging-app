@@ -25,7 +25,7 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
   const { conversationId, isOpen } = useConversation()
   const session = useSession()
 
-  const pusherKey = session.data?.user?.email
+  const pusherKey = session.data?.user?.username
 
   useEffect(() => {
     if (!pusherKey) return

@@ -30,17 +30,17 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
     return messages[messages.length - 1]
   }, [conversation.messages])
 
-  const userEmail = session.data?.user?.email
+  const username = session.data?.user?.username
 
   const hasSeen = useMemo(() => {
     if (!lastMessage) return false // No messages yet
     const seenArray = lastMessage.seen || []
 
     // Possibly no email if useSession hasn't loaded yet
-    if (!userEmail) return false
+    if (!username) return false
 
-    return seenArray.some((user) => user.email === userEmail)
-  }, [userEmail, lastMessage])
+    return seenArray.some((user) => user.username === username)
+  }, [username, lastMessage])
 
   const lastMessageText = useMemo(() => {
     if (lastMessage?.image) return 'Sent an image'
@@ -60,7 +60,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
       {conversation.isGroup ? (
         <AvatarGroup imageUrls={conversation.users.map((user) => user.image)} />
       ) : (
-        <Avatar imageUrl={otherUser?.image!} userEmail={otherUser?.email || ''} />
+        <Avatar imageUrl={otherUser?.image!} username={otherUser?.username || ''} />
       )}
       <div className='min-w-0 flex-1'>
         <div className='focus:outline-none'>

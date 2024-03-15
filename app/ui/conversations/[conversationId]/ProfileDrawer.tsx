@@ -24,7 +24,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
   const { members } = useActiveList()
-  const isActive = members.indexOf(otherUser?.email!) !== -1
+  const isActive = members.indexOf(otherUser?.username!) !== -1
 
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createdAt), 'PP')
@@ -93,7 +93,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
                               ) : (
                                 <Avatar
                                   imageUrl={otherUser?.image}
-                                  userEmail={otherUser?.email || ''}
+                                  username={otherUser?.username || ''}
                                 />
                               )}
                             </div>

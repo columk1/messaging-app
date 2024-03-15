@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const socketId = req.body.socket_id
   const channel = req.body.channel_name
-  const data = { user_id: session.user.email }
+  const data = { user_id: session.user.username }
 
   const authResponse = pusherServer.authorizeChannel(socketId, channel, data)
 

@@ -103,6 +103,17 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
               errorMsg={'Please enter a valid email address'}
             />
             <Input
+              type='text'
+              id='username'
+              name='username'
+              label='Username'
+              placeholder=''
+              required={true}
+              max={30}
+              errors={[]}
+              errorMsg={'Username must be between 1 and 30 characters long'}
+            />
+            <Input
               type='password'
               id='password'
               name='password'

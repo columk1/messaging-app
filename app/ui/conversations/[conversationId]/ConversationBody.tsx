@@ -23,7 +23,9 @@ const ConversationBody: React.FC<BodyProps> = ({ initialMessages }) => {
     bottomRef?.current?.scrollIntoView()
     // Return if last message already seen by user
     if (
-      messages[messages.length - 1]?.seen.find((user) => user.email === session?.data?.user?.email)
+      messages[messages.length - 1]?.seen.find(
+        (user) => user.username === session?.data?.user?.username
+      )
     )
       return
 

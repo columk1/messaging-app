@@ -9,7 +9,7 @@ const Loading = () => {
     <div className='w-full flex flex-col mx-auto bg-purple-3'>
       <div className='w-full h-[75.5px] flex-1 flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-purple-2 border-b border-purple-gray shadow-sm'>
         <div className='flex gap-3 items-center'>
-          <Avatar imageUrl={'/placeholder.jpg'} userEmail={''} />
+          <Avatar imageUrl={'/placeholder.jpg'} username={''} />
         </div>
       </div>
       <Spinner />

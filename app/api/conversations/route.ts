@@ -36,12 +36,12 @@ export async function POST(request: Request) {
         },
         include: {
           // Id is used for routing on client, the rest for pushing new conversations
-          users: { select: { id: true, name: true, email: true, image: true } },
+          users: { select: { id: true, name: true, username: true, image: true } },
         },
       })
       newConversation.users.forEach((user) => {
-        if (user.email) {
-          pusherServer.trigger(user.email, 'conversation:new', newConversation)
+        if (user.username) {
+          pusherServer.trigger(user.username, 'conversation:new', newConversation)
         }
       })
       return NextResponse.json(newConversation)
@@ -79,13 +79,13 @@ export async function POST(request: Request) {
           userIds: [currentUser.id, userId],
         },
         include: {
-          users: { select: { id: true, name: true, email: true, image: true } },
+          users: { select: { id: true, name: true, username: true, image: true } },
         },
       })
 
       newConversation.users.forEach((user) => {
-        if (user.email) {
-          pusherServer.trigger(user.email, 'conversation:new', newConversation)
+        if (user.username) {
+          pusherServer.trigger(user.username, 'conversation:new', newConversation)
         }
       })
       return NextResponse.json(newConversation)

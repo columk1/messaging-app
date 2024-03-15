@@ -33,8 +33,8 @@ export async function POST(request: Request) {
         },
       },
       include: {
-        sender: { select: { name: true, email: true, image: true } },
-        seen: { select: { email: true } },
+        sender: { select: { name: true, username: true, image: true } },
+        seen: { select: { username: true } },
       },
     })
 
@@ -51,13 +51,13 @@ export async function POST(request: Request) {
         },
       },
       include: {
-        users: { select: { id: true, name: true, email: true, image: true } },
+        users: { select: { id: true, name: true, username: true, image: true } },
         messages: {
           orderBy: {
             id: 'asc',
           },
           include: {
-            seen: { select: { email: true } },
+            seen: { select: { username: true } },
           },
         },
       },
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
     // const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1]
 
     updatedConversation.users.map((user) => {
-      pusherServer.trigger(user.email!, 'conversation:update', {
+      pusherServer.trigger(user.username!, 'conversation:update', {
         id: +conversationId,
         messages: [newMessage],
       })

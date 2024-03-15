@@ -29,7 +29,7 @@ const getUserByEmail = async (email: string) => {
       select: {
         id: true,
         name: true,
-        email: true,
+        username: true,
         image: true,
       },
     })
@@ -59,7 +59,7 @@ const getUsers = async () => {
       select: {
         id: true,
         name: true,
-        email: true,
+        username: true,
         image: true,
       },
     })
@@ -85,14 +85,14 @@ const getConversations = async () => {
         },
       },
       include: {
-        users: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+        users: { select: { id: true, name: true, username: true, image: true, createdAt: true } },
         messages: {
           orderBy: {
             id: 'asc',
           },
           include: {
-            sender: { select: { name: true, email: true, image: true } },
-            seen: { select: { email: true } },
+            sender: { select: { name: true, username: true, image: true } },
+            seen: { select: { username: true } },
           },
         },
       },
@@ -114,14 +114,14 @@ const getConversationById = async (id: string) => {
         id: +id,
       },
       include: {
-        users: { select: { id: true, name: true, email: true, image: true, createdAt: true } },
+        users: { select: { id: true, name: true, username: true, image: true, createdAt: true } },
         messages: {
           orderBy: {
             id: 'asc',
           },
           include: {
-            sender: { select: { name: true, email: true, image: true } },
-            seen: { select: { email: true } },
+            sender: { select: { name: true, username: true, image: true } },
+            seen: { select: { useusername: true } },
           },
         },
       },
@@ -140,8 +140,8 @@ const getMessages = async (id: string) => {
         conversationId: +id,
       },
       include: {
-        sender: { select: { name: true, email: true, image: true } },
-        seen: { select: { email: true } },
+        sender: { select: { name: true, username: true, image: true } },
+        seen: { select: { username: true } },
       },
       orderBy: {
         createdAt: 'asc',

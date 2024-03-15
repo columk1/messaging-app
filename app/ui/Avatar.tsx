@@ -5,12 +5,12 @@ import useActiveList from '@/app/hooks/useActiveList'
 
 interface AvatarProps {
   imageUrl?: string | null
-  userEmail: string
+  username: string
 }
 
-const Avatar: React.FC<AvatarProps> = ({ imageUrl, userEmail }) => {
+const Avatar: React.FC<AvatarProps> = ({ imageUrl, username }) => {
   const { members } = useActiveList()
-  const isActive = members.indexOf(userEmail) !== -1
+  const isActive = members.indexOf(username) !== -1
 
   return (
     <div className='relative h-9 w-9 md:h-11 md:w-11 '>

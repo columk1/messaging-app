@@ -20,10 +20,10 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast }) => {
 
   const senderName = data?.sender?.name
 
-  const isOwn = session?.data?.user?.email === data?.sender?.email
+  const isOwn = session?.data?.user?.username === data?.sender?.username
   const seenList = (data.seen || [])
-    .filter((user) => user.email !== data?.sender?.email)
-    .map((user) => user.name)
+    .filter((user) => user.username !== data?.sender?.username)
+    .map((user) => user.username)
     .join(', ')
 
   const container = clsx('flex gap-3 p-4', isOwn && 'justify-end')
@@ -38,7 +38,7 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast }) => {
   return (
     <div className={container}>
       <div className={avatar}>
-        <Avatar imageUrl={data.sender?.image} userEmail={data.sender?.email || ''} />
+        <Avatar imageUrl={data.sender?.image} username={data.sender?.username || ''} />
       </div>
       <div className={body}>
         <div className='flex items-center gap-1'>

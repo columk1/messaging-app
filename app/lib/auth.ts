@@ -10,6 +10,7 @@ import { z } from 'zod'
 const SessionUserSchema = z.object({
   name: z.string().trim().min(1),
   email: z.string().email(),
+  username: z.string().trim().min(1).max(30),
   image: z.string().optional(),
 })
 
@@ -24,6 +25,7 @@ export const authOptions: AuthOptions = {
           id: profile.id,
           name: profile.name,
           email: profile.email,
+          username: profile.login,
           image: profile.avatar_url,
         }
       },
@@ -63,7 +65,7 @@ export const authOptions: AuthOptions = {
         if (!passwordsMatch) {
           throw new Error(errorMsg)
         }
-        return { ...user, id: user.id.toString() } // Solves type error. Can also usePromise<any> as return type
+        return { ...user, id: user.id.toString(), username: user.username } // Solves type error. Can also usePromise<any> as return type
       },
     }),
   ],
@@ -79,12 +81,14 @@ export const authOptions: AuthOptions = {
       }
       if (user) {
         token.id = user.id
+        token.username = user.username
       }
       return token
     },
     async session({ session, token, user }) {
       if (session.user) {
         session.user.id = token.id as string
+        session.user.username = token.username
         // Set user name and image from token to catch session updates from client
         session.user.name = token.name
         session.user.image = token?.image as string

@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const { members } = useActiveList()
-  const isActive = members.indexOf(otherUser?.email!) !== -1
+  const isActive = members.indexOf(otherUser?.username!) !== -1
 
   const statusText = useMemo(() => {
     if (conversation.isGroup) {
@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           {conversation.isGroup ? (
             <AvatarGroup imageUrls={conversation.users.map((user) => user.image)} />
           ) : (
-            <Avatar imageUrl={otherUser?.image} userEmail={otherUser?.email || ''} />
+            <Avatar imageUrl={otherUser?.image} username={otherUser?.username || ''} />
           )}
           <div className='flex flex-col text-gray-200'>
             <div>{conversation.name || otherUser?.name}</div>

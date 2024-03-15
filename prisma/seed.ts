@@ -13,6 +13,7 @@ async function main() {
         create: {
           name: user.name,
           email: user.email,
+          username: user.username,
           password: hashedPassword,
           createdAt: new Date(),
         },

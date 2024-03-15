@@ -37,7 +37,7 @@ const SettingsNav: React.FC<SettingsNavProps> = ({ user }) => {
                 path === '/settings/profile' ? 'bg-purple-2 border-gray-200' : 'border-transparent'
               )}
             >
-              <Avatar imageUrl={user?.image} userEmail={user?.email || ''} />
+              <Avatar imageUrl={user?.image} username={user?.username || ''} />
               <div className='min-w-0 flex-1'>
                 <div className='flex justify-between items-center'>
                   <p className='text-sm font-medium text-gray-200'>{user?.name}</p>

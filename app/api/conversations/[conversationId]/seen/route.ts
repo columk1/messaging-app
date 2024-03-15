@@ -27,10 +27,10 @@ export async function POST(request: Request, { params }: { params: Params }) {
             id: 'asc',
           },
           include: {
-            seen: { select: { id: true, email: true } },
+            seen: { select: { id: true, username: true } },
           },
         },
-        users: { select: { id: true, name: true, email: true, image: true } },
+        users: { select: { id: true, name: true, username: true, image: true } },
       },
     })
     if (!conversation) {
@@ -53,8 +53,8 @@ export async function POST(request: Request, { params }: { params: Params }) {
         id: lastMessage.id,
       },
       include: {
-        sender: { select: { name: true, email: true, image: true } },
-        seen: { select: { email: true } },
+        sender: { select: { name: true, username: true, image: true } },
+        seen: { select: { username: true } },
       },
       data: {
         seen: {
@@ -71,7 +71,7 @@ export async function POST(request: Request, { params }: { params: Params }) {
     }
 
     // Update seen status in the conversation list
-    await pusherServer.trigger(currentUser.email, 'conversation:update', {
+    await pusherServer.trigger(currentUser.username, 'conversation:update', {
       id: +conversationId,
       messages: [updatedMessage],
     })
