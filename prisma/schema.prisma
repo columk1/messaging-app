@@ -10,94 +10,64 @@ datasource db {
 }
 
 model User {
-  id String   @id @default(uuid())
-  name String? @map("name")
-  email String? @unique
-  username String @unique
-  password String?
-  image String?
-  emailVerified DateTime?
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  conversations Conversation[]
-  // conversations UserConversation[]
-  conversationIds Int[] @map("conversation_ids")
-
-  seenMessages Message[] @relation("MessagesSeenByUser")
-  // seenMessageIds String[] @map("seen_message_ids")
-
-  accounts Account[]
-  messages Message[]
+  id               String         @id @default(uuid())
+  name             String?        @map("name")
+  email            String?        @unique
+  username         String         @unique
+  password         String?
+  image            String?
+  emailVerified    DateTime?      @map("email_verified")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  accounts         Account[]
+  contacts         User[]         @relation("contacts")
+  contactsRelation User[]         @relation("contacts")
+  conversations    Conversation[]
+  conversationIds  Int[]          @map("conversation_ids")
+  seenMessages     Message[]      @relation("MessagesSeenByUser")
+  messages         Message[]
 
   @@map("users")
 }
 
 model Account {
-    id String   @id @default(uuid())
-    userId String @map("user_id")
-    type String
-    provider String
-    providerAccountId String @map("provider_account_id")
-    refresh_token String?
-    access_token String?
-    expires_at Int?
-    token_type String?
-    scope String?
-    id_token String?
-    session_state String?
+  id                String  @id @default(uuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
 
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
 }
 
 model Conversation {
-  id Int   @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  lastMessageAt DateTime @default(now()) @map("last_message_at")
-  name String?
-  isGroup Boolean?
-
-  messages Message[]
-
-  users User[]
-  // users UserConversation[] 
-  userIds String[] @map("user_ids")
+  id            Int       @id @default(autoincrement())
+  createdAt     DateTime  @default(now()) @map("created_at")
+  lastMessageAt DateTime  @default(now()) @map("last_message_at")
+  name          String?
+  isGroup       Boolean?  @map("is_group")
+  messages      Message[]
+  users         User[]
+  userIds       String[]  @map("user_ids")
 }
 
 model Message {
-  id Int   @id @default(autoincrement())
-  body String?
-  image String?
-  createdAt DateTime @default(now()) @map("created_at")
-
-  seen User[] @relation("MessagesSeenByUser")
-  
-  // seenIds String[] @map("seen_ids")
-
-  conversationId Int @map("conversation_id")
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-
-  senderId String @map("sender_id")
-  sender User @relation(fields: [senderId], references: [id])
-
+  id             Int          @id @default(autoincrement())
+  body           String?
+  image          String?
+  createdAt      DateTime     @default(now()) @map("created_at")
+  seen           User[]       @relation("MessagesSeenByUser")
+  conversationId Int          @map("conversation_id")
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String       @map("sender_id")
+  sender         User         @relation(fields: [senderId], references: [id])
 }
-
-// model UserConversation {
-//   user User @relation(fields: [userId], references: [id])
-//   userId Int @map("user_id")
-//   conversation Conversation @relation(fields: [conversationId], references: [id])
-//   conversationId Int @map("conversation_id")
-
-//   @@id([userId, conversationId])
-// }
-
-// model UserSeenMessage {
-//   user User @relation(fields: [userId], references: [id])
-//   userId Int @map("user_id")
-//   seenMessage Message @relation(fields: [seenMessageId], references: [id])
-//   seenMessageId Int @map("seen_message_id")
-
-//   @@id([userId, seenMessageId])
-// }
