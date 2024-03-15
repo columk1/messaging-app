@@ -23,7 +23,7 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
 
   useEffect(() => {
     if (session?.status === 'authenticated') {
-      router.push('/users')
+      router.push('/conversations')
     }
   }, [session?.status, router])
 
@@ -62,7 +62,7 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
           toast.error(res?.error || 'Incorrect username or password')
         } else {
           toast.success('Login successful')
-          router.push('/users')
+          router.push('/conversations')
         }
       }
     } catch (error) {
