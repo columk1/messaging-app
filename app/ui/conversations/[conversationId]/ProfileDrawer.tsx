@@ -116,22 +116,22 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
                               <dl className='space-y-8 px-4 sm:space-y-6 sm:px-6'>
                                 {data.isGroup ? (
                                   <div>
-                                    {/* <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
-                                      Emails
+                                    <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
+                                      Usernames
                                     </dt>
                                     <dd className='mt-1 text-sm text-gray-200 sm:col-span-2'>
-                                      {data.users.map((user) => user.email).join(', ')}
-                                    </dd> */}
+                                      {data.users.map((user) => user.username).join(', ')}
+                                    </dd>
                                   </div>
                                 ) : (
                                   <>
                                     <div>
-                                      {/* <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
-                                        Email
+                                      <dt className='text-sm font-medium text-gray-350 sm:w-40 sm:flex-shrink-0'>
+                                        Username
                                       </dt>
                                       <dd className='mt-1 text-sm text-gray-200 sm:col-span-2'>
-                                        {otherUser.email}
-                                      </dd> */}
+                                        {otherUser.username}
+                                      </dd>
                                     </div>
                                     <hr className='border-gray-350' />
                                     <div>
