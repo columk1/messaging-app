@@ -1,15 +1,14 @@
 'use client'
 
 import { FullConversationType } from '@/app/lib/definitions'
-import { useCallback, useMemo } from 'react'
-import { useRouter } from 'next/navigation'
-import { Conversation, Message, User } from '@prisma/client'
+import { useMemo } from 'react'
 import { format } from 'date-fns'
 import { useSession } from 'next-auth/react'
 import clsx from 'clsx'
 import useOtherUser from '@/app/hooks/useOtherUser'
 import Avatar from '@/app/ui/Avatar'
 import AvatarGroup from '../AvatarGroup'
+import Link from 'next/link'
 
 interface ConversationListItemProps {
   conversation: FullConversationType
@@ -19,11 +18,6 @@ interface ConversationListItemProps {
 const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversation, selected }) => {
   const otherUser = useOtherUser(conversation)
   const session = useSession()
-  const router = useRouter()
-
-  const handleClick = useCallback(() => {
-    router.push(`/conversations/${conversation.id}`)
-  }, [conversation.id, router])
 
   const lastMessage = useMemo(() => {
     const messages = conversation.messages || []
@@ -51,8 +45,8 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
 
   return (
     <div className='mx-3'>
-      <button
-        onClick={handleClick}
+      <Link
+        href={`/conversations/${conversation.id}`}
         className={clsx(
           `w-full px-3 py-2 flex items-center space-x-3 rounded-lg border-l-8 hover:bg-purple-2 transition`,
           selected ? 'bg-purple-2 border-violet-400' : 'bg-purple-3 border-transparent'
@@ -85,7 +79,7 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
             </p>
           </div>
         </div>
-      </button>
+      </Link>
     </div>
   )
 }
