@@ -50,41 +50,43 @@ const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversatio
   }, [lastMessage])
 
   return (
-    <button
-      onClick={handleClick}
-      className={clsx(
-        `w-full px-5 py-2 flex items-center space-x-3 rounded-sm border-l-4 hover:bg-purple-2 transition`,
-        selected ? 'bg-purple-0 border-gray-200' : 'bg-purple-3 border-transparent'
-      )}
-    >
-      {conversation.isGroup ? (
-        <AvatarGroup imageUrls={conversation.users.map((user) => user.image)} />
-      ) : (
-        <Avatar imageUrl={otherUser?.image!} username={otherUser?.username || ''} />
-      )}
-      <div className='min-w-0 flex-1'>
-        <div className='focus:outline-none'>
-          <div className='flex justify-between items-center mb-1'>
-            <p className='text-md font-medium text-gray-200'>
-              {conversation.name || otherUser?.name}
-            </p>
-            {lastMessage?.createdAt && (
-              <p className='text-xs text-gray-350 font-light'>
-                {format(new Date(lastMessage.createdAt), 'p')}
+    <div className='mx-3'>
+      <button
+        onClick={handleClick}
+        className={clsx(
+          `w-full px-3 py-2 flex items-center space-x-3 rounded-lg border-l-8 hover:bg-purple-2 transition`,
+          selected ? 'bg-purple-2 border-violet-400' : 'bg-purple-3 border-transparent'
+        )}
+      >
+        {conversation.isGroup ? (
+          <AvatarGroup imageUrls={conversation.users.map((user) => user.image)} />
+        ) : (
+          <Avatar imageUrl={otherUser?.image!} username={otherUser?.username || ''} />
+        )}
+        <div className='min-w-0 flex-1'>
+          <div className='focus:outline-none'>
+            <div className='flex justify-between items-center mb-1'>
+              <p className='text-md font-medium text-gray-200'>
+                {conversation.name || otherUser?.name}
               </p>
-            )}
+              {lastMessage?.createdAt && (
+                <p className='text-xs text-gray-350 font-light'>
+                  {format(new Date(lastMessage.createdAt), 'p')}
+                </p>
+              )}
+            </div>
+            <p
+              className={clsx(
+                `truncate text-xs text-left`,
+                hasSeen ? 'text-gray-350' : 'text-gray-200 font-medium'
+              )}
+            >
+              {lastMessageText}
+            </p>
           </div>
-          <p
-            className={clsx(
-              `truncate text-xs text-left`,
-              hasSeen ? 'text-gray-350' : 'text-gray-200 font-medium'
-            )}
-          >
-            {lastMessageText}
-          </p>
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
   )
 }
 

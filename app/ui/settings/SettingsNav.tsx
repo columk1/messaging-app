@@ -30,40 +30,48 @@ const SettingsNav: React.FC<SettingsNavProps> = ({ user }) => {
       <nav>
         <ul>
           <li>
-            <Link
-              href={'/settings/profile'}
-              className={clsx(
-                `w-full px-5 py-2 flex items-center space-x-3 border-l-4 rounded-sm transition hover:bg-purple-2`,
-                path === '/settings/profile' ? 'bg-purple-2 border-gray-200' : 'border-transparent'
-              )}
-            >
-              <Avatar imageUrl={user?.image} username={user?.username || ''} />
-              <div className='min-w-0 flex-1'>
-                <div className='flex justify-between items-center'>
-                  <p className='text-sm font-medium text-gray-200'>{user?.name}</p>
+            <div className='mx-3'>
+              <Link
+                href={'/settings/profile'}
+                className={clsx(
+                  `w-full px-3 py-2 flex items-center space-x-3 border-l-8 rounded-lg transition hover:bg-purple-2`,
+                  path === '/settings/profile'
+                    ? 'bg-purple-2 border-violet-400'
+                    : 'border-transparent'
+                )}
+              >
+                <Avatar imageUrl={user?.image} username={user?.username || ''} />
+                <div className='min-w-0 flex-1'>
+                  <div className='flex justify-between items-center'>
+                    <p className='text-sm font-medium text-gray-200'>{user?.name}</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
             <hr className='mb-4 border-none' />
           </li>
           <hr className='border-purple-gray mx-5 my-4' />
           <li>
-            <Link
-              href='/settings/account'
-              className={clsx(
-                `w-full px-5 py-2 flex items-center space-x-3 border-l-4 rounded-sm transition hover:bg-purple-2`,
-                path === '/settings/account' ? 'bg-purple-2 border-gray-200' : 'border-transparent'
-              )}
-            >
-              <div className='min-w-0 flex-1'>
-                <div className='flex gap-3 items-center text-gray-400'>
-                  <span className='h-6 w-6 flex items-center justify-center border border-gray-400 rounded-md'>
-                    <HiOutlineKey />
-                  </span>
-                  <p className='text-sm font-medium text-gray-200'>Account</p>
+            <div className='mx-3'>
+              <Link
+                href='/settings/account'
+                className={clsx(
+                  `w-full px-3 py-2 flex items-center space-x-3 border-l-8 rounded-lg transition hover:bg-purple-2`,
+                  path === '/settings/account'
+                    ? 'bg-purple-2 border-violet-400'
+                    : 'border-transparent'
+                )}
+              >
+                <div className='min-w-0 flex-1'>
+                  <div className='flex gap-3 items-center text-gray-400'>
+                    <span className='h-6 w-6 flex items-center justify-center border border-gray-400 rounded-md'>
+                      <HiOutlineKey />
+                    </span>
+                    <p className='text-sm font-medium text-gray-200'>Account</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </li>
         </ul>
       </nav>
