@@ -29,6 +29,7 @@ const config: Config = {
     require('@tailwindcss/forms')({
       strategy: 'class',
     }),
+    require('autoprefixer'),
   ],
 }
 export default config
