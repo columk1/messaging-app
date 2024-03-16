@@ -1,4 +1,4 @@
-import UserList from '@/app/ui/contacts/UserList'
+import UserList from '@/app/ui/contacts/ContactList'
 
 const ContactsLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
