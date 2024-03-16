@@ -6,18 +6,20 @@ import { useRouter } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { MdOutlineGroupAdd } from 'react-icons/md'
+import { HiOutlineChatBubbleBottomCenterText } from 'react-icons/hi2'
 import ConversationListItem from './ConversationListItem'
 import GroupChatModal from './[conversationId]/GroupChatModal'
 import { useSession } from 'next-auth/react'
 import { pusherClient } from '@/app/lib/pusher'
 import { UserContext } from '@/app/context/UserContext'
+import Link from 'next/link'
 
 interface ConversationListProps {
   initialItems: FullConversationType[]
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => {
-  const users = useContext(UserContext)
+  const { users } = useContext(UserContext)
   const [items, setItems] = useState(initialItems) // Conversations
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -85,7 +87,7 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
       <GroupChatModal users={users} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <aside
         className={clsx(
-          `pb-20 lg:pb-0 lg:w-80 lg:min-w-80 lg:block overflow-y-auto border-r bg-purple-3 border-purple-gray`,
+          `relative pb-20 lg:pb-0 lg:w-80 lg:min-w-80 lg:block overflow-y-auto border-r bg-purple-3 border-purple-gray`,
           isOpen ? 'hidden' : 'block w-full left-0'
         )}
       >
@@ -107,6 +109,14 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
             selected={+conversationId === item.id}
           />
         ))}
+        <div className='absolute right-0 bottom-14 lg:bottom-0 p-5 z-10'>
+          <Link
+            href={'/contacts'}
+            className='block rounded-full p-2 bg-violet-400 text-gray-200 hover:opacity-75 transition'
+          >
+            <HiOutlineChatBubbleBottomCenterText size={32} className='' />
+          </Link>
+        </div>
       </aside>
     </>
   )
