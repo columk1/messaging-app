@@ -154,6 +154,81 @@ const getMessages = async (id: string) => {
   }
 }
 
+const getContacts = async () => {
+  try {
+    const currentUser = await getCurrentUser()
+    if (!currentUser) return null
+
+    const contacts = await prisma.user.findUnique({
+      where: {
+        id: currentUser.id,
+      },
+      select: {
+        contacts: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            image: true,
+          },
+        },
+      },
+    })
+
+    // Return the contacts directly, if the above assumption is correct
+    return contacts ? contacts.contacts : null
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+const addContact = async (currentUserId: string, id: string) => {
+  try {
+    const currentUser = await getCurrentUser()
+    if (!currentUser) return null
+
+    await prisma.user.update({
+      where: {
+        id: currentUserId,
+      },
+      data: {
+        contacts: {
+          connect: {
+            id: id,
+          },
+        },
+      },
+    })
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
+const removeContact = async (currentUserId: string, id: string) => {
+  try {
+    const currentUser = await getCurrentUser()
+    if (!currentUser) return null
+
+    await prisma.user.update({
+      where: {
+        id: currentUserId,
+      },
+      data: {
+        contacts: {
+          disconnect: {
+            id: id,
+          },
+        },
+      },
+    })
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
+
 export {
   getSession,
   getCurrentUser,
@@ -162,4 +237,7 @@ export {
   getConversations,
   getConversationById,
   getMessages,
+  getContacts,
+  addContact,
+  removeContact,
 }
