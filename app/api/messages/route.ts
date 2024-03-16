@@ -2,16 +2,36 @@ import { getCurrentUser } from '@/app/lib/actions'
 import { NextResponse } from 'next/server'
 import prisma from '@/app/lib/prisma'
 import { pusherServer } from '@/app/lib/pusher'
+import { z } from 'zod'
+
+const MessageSchema = z.object({
+  message: z.string().optional(),
+  image: z.string().optional(),
+  conversationId: z.string(),
+})
 
 export async function POST(request: Request) {
   try {
     const currentUser = await getCurrentUser()
-    const body = await request.json()
-    const { message, image, conversationId } = body
 
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
+
+    const body = await request.json()
+
+    const validatedFields = MessageSchema.safeParse({
+      message: body.message,
+      image: body.image,
+      conversationId: body.conversationId,
+    })
+
+    if (!validatedFields.success) {
+      return new NextResponse('Invalid data', { status: 400 })
+    }
+
+    const { message, image, conversationId } = validatedFields.data
+
     const newMessage = await prisma.message.create({
       data: {
         body: message,
