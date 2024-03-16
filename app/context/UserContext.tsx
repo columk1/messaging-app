@@ -1,10 +1,16 @@
 'use client'
 
 import { createContext, useEffect, useState } from 'react'
-import { getUsers } from '@/app/lib/actions'
+import { getContacts } from '@/app/lib/actions'
 import { ClientUser } from '@/app/lib/definitions'
 
-export const UserContext = createContext<ClientUser[]>([])
+export const UserContext = createContext<{
+  users: ClientUser[]
+  setUsers: React.Dispatch<React.SetStateAction<ClientUser[]>>
+}>({
+  users: [],
+  setUsers: () => {},
+})
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [users, setUsers] = useState<ClientUser[]>([])
@@ -13,12 +19,12 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (users.length > 0) return
     console.log('Fetching users')
     const fetchUsers = async () => {
-      const fetchedUsers = await getUsers()
-      setUsers(fetchedUsers)
+      const fetchedUsers = await getContacts()
+      setUsers(fetchedUsers || [])
     }
     fetchUsers()
   }, [])
-  return <UserContext.Provider value={users}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ users, setUsers }}>{children}</UserContext.Provider>
 }
 
 export default UserProvider
