@@ -56,7 +56,7 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users 
                 label='Name'
                 id='name'
                 name='name'
-                defaultValue=''
+                placeholder=''
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
                 disabled={loading}
