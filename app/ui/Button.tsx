@@ -34,7 +34,7 @@ const Button = ({
         danger && 'bg-rose-500 hover:bg-rose-600 focus-visible:outline-rose-600',
         !secondary &&
           !danger &&
-          'bg-violet-500 hover:bg-violet-400 focus-visible:outline-violet-300'
+          'bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 focus-visible:outline-violet-300'
       )}
     >
       {children}

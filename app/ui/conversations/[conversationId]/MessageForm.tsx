@@ -49,8 +49,8 @@ const MessageForm = () => {
           required
           placeholder='Write a message'
         />
-        <button className='rounded-full p-2 bg-violet-400 hover:bg-violet-300 transition'>
-          <HiPaperAirplane size={18} className='text-white' />
+        <button className='rounded-full p-2 bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 transition'>
+          <HiPaperAirplane size={22} className='text-white' />
         </button>
       </form>
     </div>

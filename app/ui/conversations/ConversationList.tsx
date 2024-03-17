@@ -96,7 +96,7 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
             <div className='text-2xl font-bold text-gray-200'>Messages</div>
             <button
               onClick={() => setIsModalOpen(true)}
-              className='rounded-full p-2 bg-violet-400 text-gray-200 hover:opacity-75 transition'
+              className='rounded-full p-2 bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 text-gray-200 transition'
             >
               <MdOutlineGroupAdd size={16} className='' />
             </button>
@@ -113,7 +113,7 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
         <div className='absolute right-0 bottom-14 lg:bottom-0 p-5 z-10'>
           <Link
             href={'/contacts'}
-            className='block rounded-full p-2 bg-violet-400 text-gray-200 hover:opacity-75 transition'
+            className='block rounded-full p-2 bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 text-gray-200 transition'
           >
             <HiOutlineChatBubbleBottomCenterText size={32} className='' />
           </Link>

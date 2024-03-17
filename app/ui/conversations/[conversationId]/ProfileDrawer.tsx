@@ -77,7 +77,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
                             <div className='flex items-center ml-3 h-7'>
                               <button
                                 onClick={onClose}
-                                className='rounded-md bg-violet-400 text-gray-200 hover:text-gray-100 hover:bg-violet-300'
+                                className='rounded-md bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 text-gray-200 hover:text-gray-100'
                               >
                                 <span className='sr-only'>Close panel</span>
                                 <IoClose size={24} />
@@ -106,7 +106,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, 
                                 }}
                                 className='flex flex-col items-center gap-3 group text-gray-200 hover:text-gray-100'
                               >
-                                <div className='w-10 h-10 bg-violet-400 group-hover:bg-violet-300 rounded-full flex items-center justify-center'>
+                                <div className='w-10 h-10 bg-gradient-to-br from-violet-500 to-violet-400 group-hover:from-violet-400 group-hover:to-violet-300 rounded-full flex items-center justify-center'>
                                   <IoTrash size={20} />
                                 </div>
                                 <div className='text-sm font-light'>Delete</div>

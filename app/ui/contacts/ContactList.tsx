@@ -29,7 +29,7 @@ const ContactList: React.FC = () => {
           <div className='text-2xl font-bold text-gray-200'>Contacts</div>
           <button
             onClick={() => setIsEditable(!isEditable)}
-            className='rounded-full p-2 bg-violet-400 text-gray-200 hover:opacity-75 transition'
+            className='rounded-full p-2 bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 text-gray-200 transition'
           >
             <HiMiniPencilSquare size={16} className='' />
           </button>
@@ -42,7 +42,7 @@ const ContactList: React.FC = () => {
           className='w-full px-3 py-2 flex items-center space-x-3 rounded-lg transition group hover:bg-purple-2'
         >
           <div className='relative h-9 w-9 md:h-11 md:w-11 '>
-            <div className='md:h-11 md:w-11 h-9 w-9 flex items-center justify-center relative bg-violet-500 group-hover:scale-[1.01] rounded-full overflow-hidden border-gray-100'>
+            <div className='md:h-11 md:w-11 h-9 w-9 flex items-center justify-center relative bg-gradient-to-br from-violet-500 to-violet-400 group-hover:from-violet-400 group-hover:to-violet-300 group-hover:scale-[1.01] rounded-full overflow-hidden border-gray-100'>
               <HiOutlineUserPlus className='text-gray-200 text-2xl' />
             </div>
           </div>

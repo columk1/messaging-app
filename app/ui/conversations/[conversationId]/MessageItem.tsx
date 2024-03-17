@@ -31,7 +31,9 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast }) => {
   const body = clsx('flex flex-col gap-2', isOwn && 'items-end')
   const messageBody = clsx(
     'text-sm w-fit overflow-hidden',
-    isOwn && !data.image ? 'bg-violet-400 text-gray-50' : 'bg-gray-100',
+    isOwn && !data.image
+      ? 'bg-gradient-to-br from-violet-500 to-violet-400 text-gray-50'
+      : 'bg-gray-100',
     data.image ? 'rounded-md p-0 bg-gray-100' : 'rounded-full py-2 px-3'
   )
 
