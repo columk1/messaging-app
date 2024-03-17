@@ -8,7 +8,7 @@ interface SettingsHeaderProps {
 
 const SettingsHeader: React.FC<SettingsHeaderProps> = ({ title, subtitle }) => {
   return (
-    <div className='w-full flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-purple-3 lg:bg-purple-4 border-b border-purple-gray shadow-sm'>
+    <div className='w-full flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-purple-3 border-b border-purple-gray shadow-sm'>
       <div className='flex gap-3 items-center'>
         <Link
           className='lg:hidden block text-gray-350 hover:text-gray-200 transition'

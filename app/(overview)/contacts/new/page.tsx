@@ -31,7 +31,7 @@ const NewContact = () => {
     <div className='h-full flex-1'>
       <div className='h-full flex flex-col'>
         {/* HEADER */}
-        <div className='lg:hidden w-full flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-purple-2 border-b border-purple-gray shadow-sm'>
+        <div className='w-full flex justify-between items-center sm:px-4 py-3 px-4 lg:px-6 bg-purple-2 border-b border-purple-gray shadow-sm'>
           <div className='flex gap-3 items-center'>
             <Link
               className='lg:hidden block text-gray-350 hover:text-gray-200 transition'
@@ -39,21 +39,17 @@ const NewContact = () => {
             >
               <HiChevronLeft size={32} />
             </Link>
-          </div>
-          <div className='flex flex-col text-gray-200'>
-            <div>Contacts</div>
-            <div className='text-sm font-light text-gray-400'>Add a new contact</div>
+            <div className='flex flex-col text-gray-200'>
+              <h3 className='text-xl font-semibold'>Add Contacts</h3>
+              <div className='text-sm font-light text-gray-400'>Find people you know</div>
+            </div>
           </div>
         </div>
 
         {/* USERLIST */}
-        <div className='flex-1'>
-          <div className='pb-20 lg:pb-0 block overflow-y-auto bg-purple-3 border-r border-purple-gray w-full'>
-            <div className='px-5'>
-              <div className='text-2xl font-bold text-gray-200 py-3 mb-4 border-b border-purple-gray'>
-                All Users
-              </div>
-            </div>
+        <div className='flex-1 py-4 bg-purple-3'>
+          <div className='lg:pb-0 block overflow-y-auto border-r border-purple-gray w-full'>
+            <div className='px-5'></div>
             <div className='px-5 mb-4 max-w-sm'>
               <Input
                 type='text'

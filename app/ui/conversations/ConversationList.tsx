@@ -100,6 +100,7 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
             >
               <MdOutlineGroupAdd size={16} className='' />
             </button>
+            <span className='sr-only'>Create a group chat</span>
           </div>
         </div>
         {items.map((item) => (

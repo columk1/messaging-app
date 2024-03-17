@@ -59,11 +59,11 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
   }
 
   return (
-    <div className='flex flex-col px-4 py-10 sm:px-6 lg:px-8 h-full bg-purple-4'>
+    <div className='flex flex-col px-4 py-8 sm:px-6 lg:px-8 h-full bg-purple-4'>
       <form onSubmit={handleSubmit}>
-        <h2 className='text-xl font-semibold text-gray-200'>Profile</h2>
-        <p className='mt-1 text-sm leading-6 text-gray-400'>Edit your public information.</p>
-        <div className='mt-6 flex flex-col gap-y-8'>
+        {/* <h2 className='text-xl font-semibold text-gray-200'>Profile</h2>
+        <p className='mt-1 text-sm leading-6 text-gray-400'>Edit your public information.</p> */}
+        <div className='flex flex-col gap-y-8'>
           <Input
             label='Name'
             id='name'
@@ -73,9 +73,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
             disabled={loading}
           />
           <div>
-            <label className='block text-sm font-medium leading-6 text-gray-200'>
-              Profile Picture
-            </label>
+            <label className='block text-sm font-medium text-gray-200'>Profile Picture</label>
             <div className='mt-2 p-4 flex gap-4 rounded-md border border-gray-500'>
               <img
                 width='48'
