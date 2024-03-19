@@ -15,10 +15,21 @@ interface GroupChatModalProps {
   users: ClientUser[]
 }
 
+interface FormData {
+  name: string | null
+  isGroup: string
+  members: { value: string; label: string }[] | null
+}
+
 const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users }) => {
   const router = useRouter()
-  const [formData, setFormData] = useState<Record<string, any>>({ isGroup: 'true' })
+  const [formData, setFormData] = useState<FormData>({
+    isGroup: 'true',
+    name: null,
+    members: null,
+  })
   const [loading, setLoading] = useState(false)
+  console.log(formData)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -65,7 +76,12 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users 
                 label='Members'
                 id='members'
                 options={users.map((user) => ({ value: user.id, label: user.name }))}
-                onChange={(value) => setFormData({ ...formData, members: value })}
+                onChange={(selectedOptions) =>
+                  setFormData({
+                    ...formData,
+                    members: selectedOptions as { value: string; label: string }[],
+                  })
+                }
                 disabled={loading}
               />
             </div>
