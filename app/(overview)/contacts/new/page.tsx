@@ -41,27 +41,29 @@ const NewContact = () => {
             </Link>
             <div className='flex flex-col text-gray-200'>
               <h3 className='text-xl font-semibold'>Add Contacts</h3>
-              <div className='text-sm font-light text-gray-400'>Find people you know</div>
+              <div className='text-sm font-light text-gray-400'>Find people you may know</div>
             </div>
           </div>
         </div>
 
         {/* USERLIST */}
-        <div className='flex-1 py-4 bg-purple-3'>
-          <div className='lg:pb-0 block overflow-y-auto border-r border-purple-gray w-full'>
+        <div className='px-5 mt-2 mb-4 max-w-sm'>
+          <Input
+            type='text'
+            label='Search'
+            ariaLabel='Search'
+            id='search'
+            name='search'
+            placeholder='Search...'
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          ></Input>
+        </div>
+        <hr className='border-purple-gray' />
+        <div className='flex-1 pb-4 bg-purple-3 overflow-y-auto'>
+          <div className='lg:pb-6 pb-20 block border-r border-purple-gray w-full mt-2'>
             <div className='px-5'></div>
-            <div className='px-5 mb-4 max-w-sm'>
-              <Input
-                type='text'
-                label='Search'
-                ariaLabel='Search'
-                id='search'
-                name='search'
-                placeholder='Search...'
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              ></Input>
-            </div>
+
             {/* <hr className='border-purple-gray mx-5 my-1' /> */}
             {users
               .filter(
