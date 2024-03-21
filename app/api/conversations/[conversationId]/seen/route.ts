@@ -37,6 +37,12 @@ export async function POST(request: Request, { params }: { params: Params }) {
       return new NextResponse('Invalid ID', { status: 400 })
     }
 
+    // Verify that the currentUser is in the conversation
+    if (!conversation.users.some((user) => user.id === currentUser.id)) {
+      console.log('User not in conversation')
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
     const lastMessage = conversation.messages[conversation.messages.length - 1]
 
     // Return status No Content if there are no messages

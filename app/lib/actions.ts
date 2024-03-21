@@ -112,6 +112,9 @@ const getConversationById = async (id: string) => {
     const conversation = await prisma.conversation.findUnique({
       where: {
         id: +id,
+        userIds: {
+          hasSome: [currentUser.id],
+        },
       },
       include: {
         users: { select: { id: true, name: true, username: true, image: true, createdAt: true } },

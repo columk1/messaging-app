@@ -21,6 +21,12 @@ export async function DELETE(request: Request, { params }: { params: Params }) {
       return new NextResponse('Invalid ID', { status: 400 })
     }
 
+    // Verify that the currentUser is in the conversation
+    if (!existingConversation.users.some((user) => user.id === currentUser.id)) {
+      console.log('User not in conversation')
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
     const deletedConversation = await prisma.conversation.delete({
       where: {
         id: +conversationId,

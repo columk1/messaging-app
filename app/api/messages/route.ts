@@ -32,6 +32,20 @@ export async function POST(request: Request) {
 
     const { message, image, conversationId } = validatedFields.data
 
+    // Make sure the current user is a part of the conversation
+    const existingConversation = await prisma.conversation.findUnique({
+      where: {
+        id: +conversationId,
+        userIds: {
+          hasSome: [currentUser.id],
+        },
+      },
+    })
+
+    if (!existingConversation) {
+      return new NextResponse('Invalid data', { status: 400 })
+    }
+
     const newMessage = await prisma.message.create({
       data: {
         body: message,
