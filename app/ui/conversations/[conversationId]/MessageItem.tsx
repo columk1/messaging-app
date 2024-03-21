@@ -15,7 +15,7 @@ interface MessageProps {
   isLast?: boolean
   isGroup?: boolean
 }
-const MessageItem: React.FC<MessageProps> = ({ data, isLast, isGroup = true }) => {
+const MessageItem: React.FC<MessageProps> = ({ data, isLast, isGroup }) => {
   const session = useSession()
   const [imageModalOpen, setImageModalOpen] = useState(false)
 
@@ -27,14 +27,14 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast, isGroup = true }) =
     .map((user) => user.username)
     .join(', ')
 
-  const container = clsx('flex gap-3 p-4', isOwn && 'justify-end')
+  const container = clsx('flex gap-3 px-4 py-1', isOwn && 'justify-end')
   const avatar = clsx(isOwn && 'order-2')
   const body = clsx('flex flex-col gap-2', isOwn && 'items-end')
   const messageBody = clsx(
-    'text-sm w-fit overflow-hidden',
+    'text-sm w-fit text-gray-50 overflow-hidden',
     isOwn && !data.image
       ? 'bg-gradient-to-br from-violet-500 to-violet-400 text-gray-50'
-      : 'bg-gray-100',
+      : 'bg-purple-0',
     data.image ? 'rounded-md p-0 bg-gray-100' : 'rounded-full py-2 px-3'
   )
 
@@ -70,14 +70,15 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast, isGroup = true }) =
             <div className=''>{data.body}</div>
           )}
         </div>
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex flex-col justify-end'>
           {/* TODO: target last message from otherUser if user has sent lastMessage */}
-          {isLast && isOwn && seenList.length > 0 && (
-            <div className='text-xs font-light text-gray-500'>{`Seen by ${seenList}`}</div>
-          )}
+
           <div className='text-xs text-right text-gray-400'>
             {format(new Date(data.createdAt), 'p')}
           </div>
+          {isLast && isOwn && seenList.length > 0 && (
+            <div className='text-xs font-light text-gray-400'>{`Seen by ${seenList}`}</div>
+          )}
         </div>
       </div>
     </div>
