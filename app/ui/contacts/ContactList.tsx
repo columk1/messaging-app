@@ -7,8 +7,7 @@ import { HiMiniPencilSquare, HiOutlineUserPlus } from 'react-icons/hi2'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
-import { ClientUser } from '@/app/lib/definitions'
-import { getContacts } from '@/app/lib/actions'
+import toast from 'react-hot-toast'
 
 const ContactList: React.FC = () => {
   const { users } = useContext(UserContext)
@@ -20,7 +19,7 @@ const ContactList: React.FC = () => {
   return (
     <aside
       className={clsx(
-        `pb-20 lg:pb-0 lg:w-80 block overflow-y-auto bg-purple-3 border-r border-purple-gray w-full`,
+        `pb-20 lg:pb-6 lg:w-80 block overflow-y-auto bg-purple-3 border-r border-purple-gray w-full`,
         !isBasePath && 'hidden lg:block'
       )}
     >
@@ -28,10 +27,19 @@ const ContactList: React.FC = () => {
         <div className='flex justify-between py-3 mb-4 border-b border-purple-gray'>
           <div className='text-2xl font-bold text-gray-200'>Contacts</div>
           <button
-            onClick={() => setIsEditable(!isEditable)}
-            className='rounded-full p-2 bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 text-gray-200 transition'
+            onClick={() => {
+              if (users.length > 0 && !isEditable) {
+                setIsEditable(!isEditable)
+              } else {
+                toast.error(`Oops! You don't have any contacts to edit yet`)
+              }
+            }}
+            className={clsx(
+              'rounded-full p-2 bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 text-gray-200 transition',
+              isEditable && 'outline outline-violet-200'
+            )}
           >
-            <HiMiniPencilSquare size={16} className='' />
+            <HiMiniPencilSquare size={16} />
           </button>
           <span className='sr-only'>Edit Contacts</span>
         </div>
