@@ -29,7 +29,6 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users 
     members: null,
   })
   const [loading, setLoading] = useState(false)
-  console.log(formData)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

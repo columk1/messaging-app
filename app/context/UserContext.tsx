@@ -17,7 +17,6 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (users.length > 0) return
-    console.log('Fetching users')
     const fetchUsers = async () => {
       const fetchedUsers = await getContacts()
       setUsers(fetchedUsers || [])

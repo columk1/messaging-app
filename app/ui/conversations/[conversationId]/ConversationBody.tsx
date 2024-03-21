@@ -29,7 +29,6 @@ const ConversationBody: React.FC<BodyProps> = ({ initialMessages }) => {
     )
       return
 
-    // console.log('POST /seen')
     fetch(`/api/conversations/${conversationId}/seen`, {
       method: 'POST',
     })

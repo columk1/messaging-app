@@ -50,10 +50,7 @@ export async function POST(request: Request, { params }: { params: Params }) {
       return new NextResponse(null, { status: 204 })
     }
 
-    // TODO: Reduce calls to this query
-    console.log('Updating Seen Status')
-    console.log(currentUser.email)
-    console.log(lastMessage.id)
+    // console.log('Updating Seen Status')
     const updatedMessage = await prisma.message.update({
       where: {
         id: lastMessage.id,

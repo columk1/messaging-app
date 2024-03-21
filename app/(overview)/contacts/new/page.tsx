@@ -1,11 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '@/app/context/UserContext'
+import { useEffect, useState } from 'react'
 import { HiChevronLeft, HiOutlineUserPlus } from 'react-icons/hi2'
-import UserList from '@/app/ui/contacts/ContactList'
-import UserListItem from '@/app/ui/contacts/ContactListItem'
 import { getUsers } from '@/app/lib/actions'
 import { ClientUser } from '@/app/lib/definitions'
 import NewUserListItem from '@/app/ui/contacts/NewContactListItem'
@@ -19,7 +16,6 @@ const NewContact = () => {
 
   useEffect(() => {
     if (users.length > 0) return
-    console.log('Fetching users')
     const fetchUsers = async () => {
       const fetchedUsers = await getUsers()
       setUsers(fetchedUsers || [])
