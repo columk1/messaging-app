@@ -13,7 +13,7 @@ const Avatar: React.FC<AvatarProps> = ({ imageUrl, username }) => {
   const isActive = members.indexOf(username) !== -1
 
   return (
-    <div className='relative h-9 w-9 md:h-11 md:w-11 '>
+    <div className='relative h-11 w-11'>
       <div className='relative inline-block rounded-full overflow-hidden border-2 border-gray-100'>
         <img
           src={imageUrl || '/placeholder.jpg'}
@@ -22,7 +22,7 @@ const Avatar: React.FC<AvatarProps> = ({ imageUrl, username }) => {
         />
       </div>
       {isActive ? (
-        <span className='absolute block rounded-full bg-green-500 outline outline-2 outline-gray-100 top-0 right-0 h-2 w-2 md:h-3 md:w-3' />
+        <span className='absolute block rounded-full bg-green-500 outline outline-2 outline-gray-100 top-[3px] right-[3px] h-2 w-2' />
       ) : null}
     </div>
   )
