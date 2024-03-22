@@ -1,5 +1,5 @@
 import prisma from '@/app/lib/prisma'
-import { users, conversations } from '@/app/lib/placeholder-data'
+import { users, conversations } from './seed-data'
 import bcrypt from 'bcryptjs'
 
 async function main() {

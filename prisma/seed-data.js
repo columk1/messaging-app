@@ -12,6 +12,7 @@ const users = [
       'f37b32c5-218d-4839-adce-eb8be9e869c7',
       'cce392dc-5ee3-4de8-9d37-47fb3a931e8e',
       '9c28b978-f782-4e7f-a6db-78b4c85f932f',
+      '20863b7d-ea11-4c0f-952c-fc18126d9d9e',
     ],
   },
   {
