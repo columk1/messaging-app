@@ -20,6 +20,7 @@ const Select: React.FC<SelectProps> = ({ label, id, name, value, onChange, optio
       </label>
       <div className='mt-2'>
         <ReactSelect
+          noOptionsMessage={() => 'No contacts'}
           id={id}
           name={name}
           value={value}
