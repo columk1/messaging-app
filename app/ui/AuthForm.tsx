@@ -1,19 +1,26 @@
 'use client'
 
 import { useCallback, useState, useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useFormStatus } from 'react-dom'
 import Input from './Input'
 // import { authenticate } from '@/app/lib/actions'
 import { AtSymbolIcon, KeyIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline'
-import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import Button from '@/app/ui/Button'
 import AuthSocialButton from './AuthSocialButton'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { demoCredentials } from '@/prisma/seed-data'
 
 type FormType = 'LOGIN' | 'REGISTER'
+type Credentials = {
+  name?: string
+  email: string
+  username?: string
+  password: string
+  redirect?: boolean
+}
 
 const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined)
@@ -35,27 +42,43 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
     }
   }, [formType])
 
-  const submitHandler: React.FormEventHandler<HTMLFormElement> = async (e) => {
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     setLoading(true)
 
     const formData = Object.fromEntries(new FormData(e.currentTarget))
+
+    const credentials = {
+      email: formData.email as string,
+      password: formData.password as string,
+      ...(formType === 'REGISTER' && {
+        name: formData.name as string,
+        username: formData.username as string,
+      }),
+    }
+
+    handleAuth(formType, credentials)
+  }
+
+  const handleAuth = async (formType: FormType, credentials: Credentials) => {
     try {
       if (formType === 'REGISTER') {
         const res = await fetch('/api/register', {
           method: 'POST',
-          body: JSON.stringify(formData),
+          body: JSON.stringify(credentials),
         })
         if (!res.ok) {
           const data = await res.json()
           toast.error(data.message || 'Failed to submit the data. Please try again.')
         } else {
-          signIn('credentials', formData)
+          signIn('credentials', { ...credentials, redirect: false })
+          toast.success('Registration successful')
+          router.push('/contacts')
         }
       } else {
         // LOGIN FORM
         const res = await signIn('credentials', {
-          ...formData,
+          ...credentials,
           redirect: false,
         })
         if (!res?.ok) {
@@ -73,14 +96,18 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
     }
   }
 
+  const demoLoginHandler = async () => {
+    handleAuth('LOGIN', demoCredentials)
+  }
+
   const socialAction = (action: string) => {
     setLoading(true)
     signIn(action, { redirect: false }).finally(() => setLoading(false))
   }
 
   return (
-    <div className='mt-8 sm:mx-auto sm:w-full sm: max-w-md'>
-      <div className='bg-purple-3 px-4 py-8 shadow sm:rounded-lg sm:px-10'>
+    <div className='mt-8 mx-auto w-full max-w-md px-2 sm:px-0'>
+      <div className='bg-purple-3 px-4 py-8 shadow rounded-lg sm:px-10'>
         {formType === 'REGISTER' ? (
           <form onSubmit={submitHandler} className='space-y-6'>
             <Input
@@ -164,6 +191,25 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
             <AuthSocialButton icon={BsGoogle} onClick={() => socialAction('google')} />
           </div>
         </div>
+
+        {/* Button to try a demo account */}
+        {formType === 'LOGIN' && (
+          <>
+            <div className='relative my-6'>
+              <div className='absolute flex items-center inset-0'>
+                <div className='w-full border-t border-gray-300' />
+              </div>
+              <div className='relative flex justify-center text-sm'>
+                <span className='bg-purple-3 px-2 text-gray-200'>Or </span>
+              </div>
+            </div>
+            <div className='flex justify-center'>
+              <Button onClick={demoLoginHandler} className='w-full'>
+                Try a Demo Account
+              </Button>
+            </div>
+          </>
+        )}
 
         <div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-300'>
           <div>{formType === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}</div>
