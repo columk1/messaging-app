@@ -270,4 +270,10 @@ const conversations = [
   },
 ]
 
-export { users, conversations }
+const demoCredentials = {
+  email: 'demo@example.com',
+  password: 'demoaccount',
+  redirect: false,
+}
+
+export { users, conversations, demoCredentials }
