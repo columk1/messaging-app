@@ -160,7 +160,7 @@ const conversations = [
     ],
     messages: [
       {
-        body: `Hello! Let's share our fav recipes here.`,
+        body: `Hello everyone! Let's share our fav recipes here.`,
         senderId: '07724974-2988-44bf-b56b-c53117363b85',
         seenId: '07724974-2988-44bf-b56b-c53117363b85',
       },
@@ -172,6 +172,7 @@ const conversations = [
         senderId: '27f42015-4391-4d3a-ae91-ebf8697cc6f7',
       },
       { body: 'Tea and Brown Sauce. Delish!', senderId: '27f42015-4391-4d3a-ae91-ebf8697cc6f7' },
+      { body: 'Wow.', senderId: 'e6572e98-7386-491c-a2bd-161521cade19' },
     ],
   },
   {
@@ -188,7 +189,7 @@ const conversations = [
           'https://res.cloudinary.com/dsrekt1mo/image/upload/v1710918290/wh28plusocrdcwsa2x0y.jpg',
         senderId: 'f37b32c5-218d-4839-adce-eb8be9e869c7',
       },
-      { body: 'Ha', senderId: '07724974-2988-44bf-b56b-c53117363b85' },
+      { body: 'Ha!', senderId: '07724974-2988-44bf-b56b-c53117363b85' },
       {
         body: `It's not bad. There should be a window in the afternoon if we can make it out there.`,
         senderId: 'f37b32c5-218d-4839-adce-eb8be9e869c7',
@@ -232,7 +233,7 @@ const conversations = [
         senderId: '07724974-2988-44bf-b56b-c53117363b85',
       },
       {
-        body: "It's been challenging but rewarding. Still fine-tuning the model's accuracy, but I'm getting some promising results. What about your scripts? Anything exciting?",
+        body: "It's been challenging but rewarding. Still fine-tuning the model's accuracy, but I'm getting some promising results. 🤓 What about your scripts? Anything exciting?",
         senderId: '20863b7d-ea11-4c0f-952c-fc18126d9d9e',
       },
       {
