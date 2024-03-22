@@ -11,6 +11,7 @@ interface Params {
 const ConversationId = async ({ params }: { params: Params }) => {
   const conversation = await getConversationById(params.conversationId)
   const messages = conversation?.messages
+  const isGroup = conversation?.isGroup
 
   return !conversation ? (
     <div className='h-full flex-1'>
@@ -23,7 +24,7 @@ const ConversationId = async ({ params }: { params: Params }) => {
     <div className='h-full flex-1'>
       <div className='h-full flex flex-col'>
         <Header conversation={conversation} />
-        <ConversationBody initialMessages={messages || []} />
+        <ConversationBody initialMessages={messages || []} isGroup={isGroup} />
         <MessageForm />
       </div>
     </div>

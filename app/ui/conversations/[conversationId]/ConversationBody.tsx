@@ -9,9 +9,10 @@ import { useSession } from 'next-auth/react'
 
 interface BodyProps {
   initialMessages: FullMessageType[]
+  isGroup?: boolean | null
 }
 
-const ConversationBody: React.FC<BodyProps> = ({ initialMessages }) => {
+const ConversationBody: React.FC<BodyProps> = ({ initialMessages, isGroup }) => {
   const [messages, setMessages] = useState(initialMessages)
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -77,7 +78,12 @@ const ConversationBody: React.FC<BodyProps> = ({ initialMessages }) => {
   return (
     <div className='flex-1 overflow-y-auto bg-purple-3'>
       {messages.map((message, i) => (
-        <MessageItem key={message.id} data={message} isLast={i === messages.length - 1} />
+        <MessageItem
+          key={message.id}
+          data={message}
+          isLast={i === messages.length - 1}
+          isGroup={isGroup}
+        />
       ))}
       <div ref={bottomRef} className='pt-4'></div>
     </div>

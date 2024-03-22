@@ -13,7 +13,7 @@ import ImageModal from './ImageModal'
 interface MessageProps {
   data: FullMessageType
   isLast?: boolean
-  isGroup?: boolean
+  isGroup?: boolean | null
 }
 const MessageItem: React.FC<MessageProps> = ({ data, isLast, isGroup }) => {
   const session = useSession()
@@ -32,10 +32,11 @@ const MessageItem: React.FC<MessageProps> = ({ data, isLast, isGroup }) => {
   const body = clsx('flex flex-col gap-2', isOwn && 'items-end')
   const messageBody = clsx(
     'text-sm w-fit text-gray-50 overflow-hidden',
-    isOwn && !data.image
-      ? 'bg-gradient-to-br from-violet-500 to-violet-400 text-gray-50'
-      : 'bg-purple-0',
-    data.image ? 'rounded-md p-0 bg-gray-100' : 'rounded-full py-2 px-3'
+    !data.image &&
+      (isOwn
+        ? 'bg-gradient-to-br from-violet-500 to-violet-400 text-gray-50 rounded-l-xl rounded-br-xl'
+        : 'bg-purple-0 rounded-r-xl rounded-bl-xl'),
+    data.image ? 'rounded-md p-0 bg-gray-100' : 'py-2 px-3'
   )
 
   return (
