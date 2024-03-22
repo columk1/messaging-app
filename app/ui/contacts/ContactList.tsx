@@ -16,6 +16,14 @@ const ContactList: React.FC = () => {
   const path = usePathname()
   const isBasePath = path === '/contacts'
 
+  const handleClickEdit = () => {
+    if (users.length > 0) {
+      setIsEditable(!isEditable)
+    } else {
+      toast.error(`Oops! You don't have any contacts to edit yet`)
+    }
+  }
+
   return (
     <aside
       className={clsx(
@@ -27,13 +35,7 @@ const ContactList: React.FC = () => {
         <div className='flex justify-between py-3 mb-4 border-b border-purple-gray'>
           <div className='text-2xl font-bold text-gray-200'>Contacts</div>
           <button
-            onClick={() => {
-              if (users.length > 0 && !isEditable) {
-                setIsEditable(!isEditable)
-              } else {
-                toast.error(`Oops! You don't have any contacts to edit yet`)
-              }
-            }}
+            onClick={handleClickEdit}
             className={clsx(
               'rounded-full p-2 bg-gradient-to-br from-violet-500 to-violet-400 hover:from-violet-400 hover:to-violet-300 text-gray-200 transition',
               isEditable && 'outline outline-violet-200'
