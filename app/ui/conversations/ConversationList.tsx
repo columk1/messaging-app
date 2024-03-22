@@ -103,13 +103,19 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => 
             <span className='sr-only'>Create a group chat</span>
           </div>
         </div>
-        {items.map((item) => (
-          <ConversationListItem
-            key={item.id}
-            conversation={item}
-            selected={+conversationId === item.id}
-          />
-        ))}
+        {items.length === 0 ? (
+          <div className='flex items-center h-32 justify-center text-gray-200 font-semibold'>
+            New conversations will appear here
+          </div>
+        ) : (
+          items.map((item) => (
+            <ConversationListItem
+              key={item.id}
+              conversation={item}
+              selected={+conversationId === item.id}
+            />
+          ))
+        )}
         <div className='absolute right-0 bottom-14 lg:bottom-0 p-5 z-10'>
           <Link
             href={'/contacts'}
