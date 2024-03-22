@@ -10,9 +10,10 @@ import { useSession } from 'next-auth/react'
 interface BodyProps {
   initialMessages: FullMessageType[]
   isGroup?: boolean | null
+  colorMap: { [key: string]: string } | null
 }
 
-const ConversationBody: React.FC<BodyProps> = ({ initialMessages, isGroup }) => {
+const ConversationBody: React.FC<BodyProps> = ({ initialMessages, isGroup, colorMap }) => {
   const [messages, setMessages] = useState(initialMessages)
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -76,13 +77,17 @@ const ConversationBody: React.FC<BodyProps> = ({ initialMessages, isGroup }) => 
   // useEffect(() => bottomRef?.current?.scrollIntoView(), [messages])
 
   return (
-    <div className='flex-1 overflow-y-auto bg-purple-3'>
+    <div className='flex-1 pt-4 overflow-y-auto bg-purple-3'>
       {messages.map((message, i) => (
         <MessageItem
           key={message.id}
           data={message}
           isLast={i === messages.length - 1}
           isGroup={isGroup}
+          matchesPreviousSender={
+            i > 0 && messages[i - 1].sender.username === message.sender.username
+          }
+          color={colorMap?.[message.sender.username] || 'purple-300'}
         />
       ))}
       <div ref={bottomRef} className='pt-4'></div>
