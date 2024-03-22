@@ -11,7 +11,7 @@ const SignUpSchema = z.object({
     .trim()
     .min(1, { message: 'Username is required' })
     .max(30, { message: 'Username can be a maximum of 30 characters' }),
-  password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
+  password: z.string().min(8, { message: 'Password must be at least 8 characters' }),
 })
 
 export async function POST(req: Request) {
