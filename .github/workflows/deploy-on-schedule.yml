@@ -1,0 +1,17 @@
+# Deploy once a week to reset and re-seed the db (included in build command)
+
+name: Deploy Once a Week
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"
+jobs:
+  webhook:
+    name: Ping webhook
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use curl to ping webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: |
+          curl -n "$WEBHOOK_URL"
