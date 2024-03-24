@@ -212,7 +212,7 @@ const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
         )}
 
         <div className='flex gap-2 justify-center text-sm mt-6 px-2 text-gray-300'>
-          <div>{formType === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}</div>
+          <div>{formType === 'LOGIN' ? 'New to Messaging App?' : 'Already have an account?'}</div>
           <button onClick={toggleFormType} className='underline cursor-pointer'>
             {formType === 'LOGIN' ? 'Sign Up' : 'Login'}
           </button>
