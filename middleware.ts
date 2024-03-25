@@ -7,5 +7,10 @@ export default withAuth({
 })
 
 export const config = {
-  matcher: ['/contacts/:path*', '/conversations/:path*', '/settings/:path*'],
+  matcher: [
+    '/contacts/:path*',
+    '/conversations/:path*',
+    '/settings/:path*',
+    '/api/!(register)/:path*',
+  ],
 }
