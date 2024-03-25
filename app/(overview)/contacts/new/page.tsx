@@ -62,11 +62,16 @@ const NewContact = () => {
 
             {/* <hr className='border-purple-gray mx-5 my-1' /> */}
             {users
-              .filter(
-                (user) =>
-                  user.username.includes(searchQuery.toLowerCase()) ||
-                  user.name.toLowerCase().includes(searchQuery.toLowerCase())
-              )
+              .filter((user) => {
+                const searchWords = searchQuery.toLowerCase().split(' ')
+                return searchWords.some(
+                  (word) =>
+                    user.username.toLowerCase().startsWith(word) ||
+                    user.name.toLowerCase().startsWith(word) ||
+                    (user.name.toLowerCase().split(' ').length > 1 &&
+                      user.name.toLowerCase().split(' ')[1].startsWith(word))
+                )
+              })
               .map((userInfo) => (
                 <NewUserListItem
                   key={userInfo.id}
