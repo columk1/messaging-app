@@ -1,8 +1,11 @@
 <a name="readme-top"></a>
 
 <h3 align="center">Messaging App</h3>
+    <p align="center">
+  <b><a href="https://messaging-app-azure.vercel.app/" >messaging-app-azure.vercel.app</a></b>
+  </p>
   <p align="center">
-  A real-time messaging app built with [Next.js](https://nextjs.org/) using React, Tailwind, Prisma, Postgres, NextAuth and Pusher <b><a href="https://messaging-app-azure.vercel.app/" >messaging-app-azure.vercel.app</a></b> hosted on Vercel.
+  A real-time messaging app built with <a href="https://nextjs.org/" >Next.js</a> using React, Tailwind, Prisma, Postgres, NextAuth and Pusher. Hosted on Vercel.
   </p>
 </div>
 
@@ -12,9 +15,9 @@
 
 ## About The Project
 
-The guts of this project comes from a tutorial by [AntonioErdeljac](https://github.com/AntonioErdeljac). You can view his original repo [here](https://github.com/AntonioErdeljac/next13-messenger).
+The guts of this project came from a tutorial by [AntonioErdeljac](https://github.com/AntonioErdeljac). You can view his original repo [here](https://github.com/AntonioErdeljac/next13-messenger).
 
-I made a list of 60 issues as I went through the tutorial and worked through them one by one. From the beginning, I made some design choices, opting to use a serverless Postgres database instead of the MongoDb instance used in the tutorial. I also chose to create some of my own custom solutions where packages had been reached for. I focused mostly on security and performance but made improvements in many areas. Most of the significant changes I made have been added to the [changelog](CHANGELOG.md). There is also a more verbose summary in the collapsed section below.
+I made a list of 60 issues as I went through the tutorial and worked through them one by one. From the beginning, I made design choices, opting to use a serverless Postgres database instead of the MongoDb instance used in the tutorial. I also chose to create some of my own custom solutions where libraries had been used. I focused mostly on security and performance but made improvements in many areas. Most of the significant changes I made have been added to the [changelog](CHANGELOG.md). There is a summary of my process in the collapsed section below.
 
 <details>
 <summary>Summary of changes</summary>
@@ -28,7 +31,7 @@ In terms of accessibility I replaced a lot of clickable divs with actual button 
 
 After finishing the most glaring issues, I built out the messaging interface, adding more props to the message body component and using them to enhance the use of names in group conversations, to designate a color to each user in a group, and to group sequences of messages from the same user together.
 I created a contact list feature and an interface to search from all users and add or remove them from contacts.
-Then I created a seed script that creates multiple users and conversations, as well as a demo account and a demo account login button for the login page.
+Then I created a seed script that creates multiple users and conversations, as well as a demo account and a demo account login button for the login page. I configured the db to be reset and re-seeded at build time and created a GitHub action with a cron job that builds and deploys my application on a regular schedule. This allows for less moderation and ensures the demo account won't get too far from its original state.
 </details>
 
 <!-- GETTING STARTED -->
@@ -39,15 +42,14 @@ To get a local copy up and running follow these steps.
 
 ### Prerequisites
 
-1. Install and use the correct version of Node using [NVM](https://github.com/nvm-sh/nvm)
+1. Install the correct version of Node using [NVM](https://github.com/nvm-sh/nvm)
+```sh
+nvm install 21.6.0
+```
 2. Set up a serverless Postgres database with [Neon](https://neon.tech/). Alternatively, check the documentation of the provider you are using and import the relevant driver adapter to `./app/lib/prisma`
 3. Set up a real-time channel with [Pusher](https://pusher.com/).
 4. Set up a product environment with [Cloudinary](https://cloudinary.com/).
 5. Register your application to use the 0Auth APIs of [Github](https://github.com/settings/developers) and [Google Cloud](https://console.cloud.google.com/)
-
-```sh
-nvm install 21.6.0
-```
 
 ### Installation
 
@@ -96,15 +98,16 @@ nvm install 21.6.0
 - [ ] Add popover to individual messages - delete, reply, copy, forward
 - [ ] Add option to leave conversation
 - [ ] Call to action to "Add to contacts" when receiving a message from a non-contact
-- [ ] Limit messages and implement history-loading on scroll
+- [ ] Create unit tests and snapshots using Vitest
+- [ ] Limit queried messages and implement history-loading on scroll
 
 <!-- CONTACT -->
 
 ## Contact
 
-Email - columk1@gmail.com
-Twitter - [@ColumKelly3](https://twitter.com/ColumKelly3)
-Website - [columkelly.com](https://www.columkelly.com)
+Email: columk1@gmail.com  
+Twitter: [@ColumKelly3](https://twitter.com/ColumKelly3)  
+Website: [columkelly.com](https://columkelly.com)
 
 Live Project Link: [messaging-app-azure.vercel.app](https://messaging-app-azure.vercel.app/)
 
