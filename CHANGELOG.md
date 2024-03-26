@@ -17,21 +17,21 @@
 - Replace noSQL database with relational database
 - Replace packages with custom solutions (react-hook-form, axios, react-loading-skeleton, react-spinners)
 - Redesign messaging interface 
-- Replace deprecated configuration option "domains"
+- Replace deprecated next.config option "domains" with "remotePatterns" configuration
 
 ### Removed
-- Remove unrequired packages (superjson, next-superjson-plugin)
-- Remove redundant markup
+- Unnecessary packages (superjson, next-superjson-plugin)
+- Redundant markup elements and CSS classes
 
 ### Fixed
 - Settings not accessible on small screens
+- API routes missing from auth middleware
 - Conversation not sorting correctly when updated
 - Overuse of otherUser and useConversation hooks causing components to be rendered on the client unnecessarily
 - Conversation members not redirected when conversation is deleted
 - User not re-directed when creating a new group chat
 - Existing chat returned when a new group chat is created with a user from a previous chat
 - Profile drawer closes on first click of modal
-- Redundant markup elements and CSS classes
 - Users able to post messages to conversations they are not part of
 - Conversations accessible by unauthorized users
 - Numerous other small bugs related to UI behaviour and data-ordering
@@ -48,7 +48,7 @@
 - Transition to more complex layouts to allow more server-side rendering and to enable more specific loading states to only affect dynamic sections or individual components
 
 ### Security
-- Protect API routes
+- Protect all pages and routes except for /login and /register
 - Minimize user data sent to the client
 - Replace public email address with username
 - Validate and sanitize data sent from client
