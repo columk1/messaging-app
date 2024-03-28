@@ -1,5 +1,3 @@
-'use client' // Test this for performance
-
 import Avatar from '@/app/ui/Avatar'
 import Spinner from '@/app/ui/Spinner'
 import MessageForm from '@/app/ui/conversations/[conversationId]/MessageForm'
