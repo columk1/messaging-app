@@ -17,6 +17,7 @@
 - Replace noSQL database with relational database
 - Replace packages with custom solutions (react-hook-form, axios, react-loading-skeleton, react-spinners)
 - Redesign messaging interface 
+- Update all libraries to latest stable release
 - Replace deprecated next.config option "domains" with "remotePatterns" configuration
 
 ### Removed
