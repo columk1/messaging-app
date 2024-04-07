@@ -11,7 +11,7 @@ interface SettingsNavProps {
   user: User | null
 }
 
-const SettingsNav: React.FC<SettingsNavProps> = ({ user }) => {
+const SettingsNav = ({ user }: SettingsNavProps) => {
   const path = usePathname()
   const isBasePath = path === '/settings'
   return (

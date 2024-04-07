@@ -15,7 +15,7 @@ interface SettingsFormProps {
   user: User | null
 }
 
-const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
+const SettingsForm = ({ user }: SettingsFormProps) => {
   const { data: session, update } = useSession()
   const router = useRouter()
   const [image, setImage] = useState(user?.image)
@@ -61,8 +61,6 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ user }) => {
   return (
     <div className='flex flex-col px-4 py-8 sm:px-6 lg:px-8 h-full bg-purple-4'>
       <form onSubmit={handleSubmit}>
-        {/* <h2 className='text-xl font-semibold text-gray-200'>Profile</h2>
-        <p className='mt-1 text-sm leading-6 text-gray-400'>Edit your public information.</p> */}
         <div className='flex flex-col gap-y-8'>
           <Input
             label='Name'

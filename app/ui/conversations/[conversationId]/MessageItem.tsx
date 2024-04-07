@@ -1,29 +1,21 @@
 'use client'
 
-// import { Message } from '@prisma/client'
 import { FullMessageType } from '@/app/lib/definitions'
 import clsx from 'clsx'
 import { useSession } from 'next-auth/react'
-import Avatar from '@/app/ui/Avatar'
 import { format } from 'date-fns'
 import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import ImageModal from './ImageModal'
 
-interface MessageProps {
+interface MessageItemProps {
   data: FullMessageType
   isLast?: boolean
   isGroup?: boolean | null
   matchesPreviousSender: boolean
   color: string
 }
-const MessageItem: React.FC<MessageProps> = ({
-  data,
-  isLast,
-  isGroup,
-  matchesPreviousSender,
-  color,
-}) => {
+const MessageItem = ({ data, isLast, isGroup, matchesPreviousSender, color }: MessageItemProps) => {
   const session = useSession()
   const [imageModalOpen, setImageModalOpen] = useState(false)
 

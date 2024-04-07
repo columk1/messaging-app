@@ -21,7 +21,7 @@ interface FormData {
   members: { value: string; label: string }[] | null
 }
 
-const GroupChatModal: React.FC<GroupChatModalProps> = ({ isOpen, onClose, users }) => {
+const GroupChatModal = ({ isOpen, onClose, users }: GroupChatModalProps) => {
   const router = useRouter()
   const [formData, setFormData] = useState<FormData>({
     isGroup: 'true',

@@ -9,7 +9,7 @@ import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 
-const ContactList: React.FC = () => {
+const ContactList = () => {
   const { users } = useContext(UserContext)
   const [isEditable, setIsEditable] = useState(false)
 

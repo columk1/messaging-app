@@ -6,7 +6,7 @@ interface AvatarGroupProps {
   imageUrls: (string | null)[]
 }
 
-const AvatarGroup: React.FC<AvatarGroupProps> = ({ imageUrls = [] }) => {
+const AvatarGroup = ({ imageUrls = [] }: AvatarGroupProps) => {
   const slicedUrls = imageUrls.slice(0, 3)
 
   const positionMap: { [key: number]: string } = {

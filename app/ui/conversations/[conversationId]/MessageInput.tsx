@@ -8,14 +8,7 @@ interface MessageInputProps {
   required?: boolean
   error?: string | null
 }
-const MessageInput: React.FC<MessageInputProps> = ({
-  type,
-  id,
-  name,
-  placeholder,
-  required,
-  error,
-}) => {
+const MessageInput = ({ type, id, name, placeholder, required, error }: MessageInputProps) => {
   return (
     <div className='relative w-full'>
       <input

@@ -11,7 +11,7 @@ interface DesktopItemProps {
   onClick?: () => void
 }
 
-const DesktopItem: React.FC<DesktopItemProps> = ({ label, href, icon: Icon, onClick, active }) => {
+const DesktopItem = ({ label, href, icon: Icon, onClick, active }: DesktopItemProps) => {
   return (
     <li onClick={onClick}>
       <Link

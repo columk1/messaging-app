@@ -11,7 +11,7 @@ interface MobileItemProps {
   onClick?: () => void
 }
 
-const MobileItem: React.FC<MobileItemProps> = ({ href, icon: Icon, active, onClick }) => {
+const MobileItem = ({ href, icon: Icon, active, onClick }: MobileItemProps) => {
   return (
     <Link
       href={href}

@@ -1,6 +1,6 @@
 'use client'
 
-import { Conversation, User } from '@prisma/client'
+import { Conversation } from '@prisma/client'
 import { format } from 'date-fns'
 import { Fragment, useMemo, useState } from 'react'
 import { Transition, Dialog } from '@headlessui/react'
@@ -20,7 +20,7 @@ interface ProfileDrawerProps {
   onClose: () => void
 }
 
-const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, otherUser, isOpen, onClose }) => {
+const ProfileDrawer = ({ data, otherUser, isOpen, onClose }: ProfileDrawerProps) => {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
   const { members } = useActiveList()

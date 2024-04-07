@@ -15,7 +15,7 @@ interface ConversationListItemProps {
   selected?: boolean
 }
 
-const ConversationListItem: React.FC<ConversationListItemProps> = ({ conversation, selected }) => {
+const ConversationListItem = ({ conversation, selected }: ConversationListItemProps) => {
   const otherUser = useOtherUser(conversation)
   const session = useSession()
 

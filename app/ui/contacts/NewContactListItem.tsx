@@ -3,10 +3,8 @@
 import { useRouter } from 'next/navigation'
 import { useState, useCallback, useContext } from 'react'
 import Avatar from '@/app/ui/Avatar'
-import { User } from 'next-auth'
 import toast from 'react-hot-toast'
 import { ClientUser } from '@/app/lib/definitions'
-import { revalidatePath } from 'next/cache'
 import { UserContext } from '@/app/context/UserContext'
 
 interface UserListItemProps {
@@ -14,7 +12,7 @@ interface UserListItemProps {
   handleAddUser: (user: ClientUser) => void
 }
 
-const NewContactListItem: React.FC<UserListItemProps> = ({ user, handleAddUser }) => {
+const NewContactListItem = ({ user, handleAddUser }: UserListItemProps) => {
   const { users, setUsers } = useContext(UserContext)
   const router = useRouter()
   const [loading, setLoading] = useState(false)

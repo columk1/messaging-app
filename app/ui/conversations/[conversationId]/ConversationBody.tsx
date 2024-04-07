@@ -13,7 +13,7 @@ interface BodyProps {
   colorMap: { [key: string]: string } | null
 }
 
-const ConversationBody: React.FC<BodyProps> = ({ initialMessages, isGroup, colorMap }) => {
+const ConversationBody = ({ initialMessages, isGroup, colorMap }: BodyProps) => {
   const [messages, setMessages] = useState(initialMessages)
   const bottomRef = useRef<HTMLDivElement>(null)
 

@@ -13,7 +13,7 @@ interface UserListItemProps {
   isEditable: boolean
 }
 
-const UserListItem: React.FC<UserListItemProps> = ({ user, isEditable }) => {
+const UserListItem = ({ user, isEditable }: UserListItemProps) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { setUsers } = useContext(UserContext)

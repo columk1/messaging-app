@@ -9,7 +9,7 @@ interface ImageModalProps {
   onClose: () => void
 }
 
-const ImageModal: React.FC<ImageModalProps> = ({ src, isOpen, onClose }) => {
+const ImageModal = ({ src, isOpen, onClose }: ImageModalProps) => {
   return (
     src && (
       <Modal isOpen={isOpen} onClose={onClose}>

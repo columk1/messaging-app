@@ -18,7 +18,7 @@ interface SettingsModalProps {
   currentUser: User | null
 }
 
-const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, currentUser }) => {
+const SettingsModal = ({ isOpen, onClose, currentUser }: SettingsModalProps) => {
   const router = useRouter()
   const [image, setImage] = useState(currentUser?.image)
   const [loading, setLoading] = useState(false)

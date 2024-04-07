@@ -18,7 +18,7 @@ interface ConversationListProps {
   initialItems: FullConversationType[]
 }
 
-const ConversationList: React.FC<ConversationListProps> = ({ initialItems }) => {
+const ConversationList = ({ initialItems }: ConversationListProps) => {
   const { users } = useContext(UserContext)
   const [items, setItems] = useState(initialItems) // Conversations
   const [isModalOpen, setIsModalOpen] = useState(false)

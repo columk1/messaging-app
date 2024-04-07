@@ -12,7 +12,7 @@ interface SelectProps {
   disabled?: boolean
 }
 
-const Select: React.FC<SelectProps> = ({ label, id, name, value, onChange, options, disabled }) => {
+const Select = ({ label, id, name, value, onChange, options, disabled }: SelectProps) => {
   return (
     <div className='z-[100]'>
       <label htmlFor={id} className='block text-sm font-medium leading-6 text-gray-200'>

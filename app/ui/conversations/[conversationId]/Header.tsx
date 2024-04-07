@@ -18,7 +18,7 @@ interface HeaderProps {
   }
 }
 
-const Header: React.FC<HeaderProps> = ({ conversation }) => {
+const Header = ({ conversation }: HeaderProps) => {
   const otherUser = useOtherUser(conversation)
   const [drawerOpen, setDrawerOpen] = useState(false)
 

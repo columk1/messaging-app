@@ -11,7 +11,7 @@ interface DesktopSidebarProps {
   currentUser: User | null
 }
 
-const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {
+const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
   const routes = useRoutes()
   const [isOpen, setIsOpen] = useState(false)
 
