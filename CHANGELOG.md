@@ -19,6 +19,7 @@
 - Redesign messaging interface 
 - Update all libraries to latest stable release
 - Replace deprecated next.config option "domains" with "remotePatterns" configuration
+- Remove React.FC from codebase
 
 ### Removed
 - Unnecessary packages (superjson, next-superjson-plugin)
