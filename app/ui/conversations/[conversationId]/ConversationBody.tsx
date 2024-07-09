@@ -40,9 +40,6 @@ const ConversationBody = ({ initialMessages, isGroup, colorMap }: BodyProps) => 
     pusherClient.subscribe(conversationId)
 
     const messageHandler = (message: FullMessageType) => {
-      // fetch(`/api/conversations/${conversationId}/seen`, {
-      //   method: 'POST',
-      // })
       setMessages((prevMessages) => {
         return prevMessages.find((item) => item.id === message.id)
           ? prevMessages
@@ -73,8 +70,6 @@ const ConversationBody = ({ initialMessages, isGroup, colorMap }: BodyProps) => 
       pusherClient.unbind('message:update', updateMessageHandler)
     }
   }, [conversationId])
-
-  // useEffect(() => bottomRef?.current?.scrollIntoView(), [messages])
 
   return (
     <div className='flex-1 pt-4 overflow-y-auto bg-purple-3'>

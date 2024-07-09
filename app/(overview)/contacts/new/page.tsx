@@ -60,7 +60,6 @@ const NewContact = () => {
           <div className='lg:pb-6 pb-20 block border-r border-purple-gray w-full mt-2'>
             <div className='px-5'></div>
 
-            {/* <hr className='border-purple-gray mx-5 my-1' /> */}
             {users
               .filter((user) => {
                 const searchWords = searchQuery.toLowerCase().split(' ')

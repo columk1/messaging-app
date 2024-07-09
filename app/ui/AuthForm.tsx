@@ -23,7 +23,6 @@ type Credentials = {
 }
 
 const AuthForm = ({ formType = 'LOGIN' }: { formType?: FormType }) => {
-  // const [errorMessage, dispatch] = useFormState(authenticate, undefined)
   const session = useSession()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
@@ -231,7 +230,6 @@ function SubmitButton({ title }: { title: string }) {
       aria-disabled={pending}
     >
       {title}
-      {/* <ArrowRightIcon className='ml-auto h-5 w-5 text-gray-50' /> */}
     </Button>
   )
 }

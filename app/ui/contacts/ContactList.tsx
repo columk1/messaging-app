@@ -63,7 +63,6 @@ const ContactList = () => {
           </div>
         </Link>
       </div>
-      {/* <hr className='border-purple-gray mx-5 my-1' /> */}
       {users.length === 0 ? (
         <div className='flex items-center h-32 justify-center text-gray-200 font-semibold'>
           No contacts yet

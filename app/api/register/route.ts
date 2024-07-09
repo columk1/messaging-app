@@ -30,7 +30,6 @@ export async function POST(req: Request) {
     })
 
     if (!validatedFields.success) {
-      // return new NextResponse('Invalid data', { status: 400 })
       console.log(validatedFields.error)
       const responseData = {
         error: validatedFields.error.flatten().fieldErrors,
